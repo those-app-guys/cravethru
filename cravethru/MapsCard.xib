@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapsCardViewController" customModule="cravethru" customModuleProvider="target">
             <connections>
+                <outlet property="handle_view" destination="4QG-dX-cmw" id="VNB-uc-UJN"/>
                 <outlet property="view" destination="iN0-l3-epB" id="E9n-Gq-Tjv"/>
             </connections>
         </placeholder>
