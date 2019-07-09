@@ -6,8 +6,8 @@
 #       - Quotes required around for 1st arg.
 
 # Debug
-printf "\nCommit Message: $1\n"
-printf "Pushed To: $2\n\n"
+printf "\n\tCommit Message: $1"
+printf "\n\tPushed To: $2\n\n"
 
 # Github Pushing
 git add .  
