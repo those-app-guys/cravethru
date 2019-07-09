@@ -6,8 +6,8 @@
 #       - Quotes required around for 1st arg.
 
 # Debug
-echo "Commit Message: $1"
-echo "Pushed to: $2"
+echo "\nCommit Message: $1"
+echo "Pushed to: $2\n"
 
 # Github Pushing
 git add .  
