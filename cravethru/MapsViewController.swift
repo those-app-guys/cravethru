@@ -42,16 +42,54 @@ class MapsViewController: UIViewController {
         self.view.addSubview(visual_effect_view)
         
         // Load Maps Card View Controller
-        card_view_controller = MapsCardViewController(nibName: "MapsCard", bundle: nil) // Refers to: MapsCard.xib
-        self.addChild(card_view_controller)                                             // Allows it to be in the same screen as the Maps View
+        card_view_controller = MapsCardViewController(nibName: "MapsCard", bundle: nil) // Initalizing; Refers to: MapsCard.xib
+        self.addChild(card_view_controller)                                             // Allows it to be in the same screen as the Maps View; Child to Main View
         self.view.addSubview(card_view_controller.view)                                 // Shows the Maps Card View
         
         let y = self.view.frame.height - card_handle_area_height    // Takes the Maps View Height (Entire Screen)
         card_view_controller.view.frame = CGRect(x: 0, y: y, width: self.view.bounds.width, height: card_height)
         
-        card_view_controller.view.clipsToBounds = true
+        card_view_controller.view.clipsToBounds = true // Getting correct display of corner radius
+        
+        // Gestures of Card
+        let tap_gesture_recognizer = UITapGestureRecognizer(target: self, action: #selector(MapsViewController.handle_card_tap(recognizer:)))
+        let pan_gesture_recognizer = UIPanGestureRecognizer(target: self, action: #selector(MapsViewController.handle_card_pan(recognizer:)))
+        
+        card_view_controller.handle_view.addGestureRecognizer(tap_gesture_recognizer)
+        card_view_controller.handle_view.addGestureRecognizer(pan_gesture_recognizer)
+    }
+    
+    @objc
+    func handle_card_tap(recognizer: UITapGestureRecognizer) {
+        
     }
 
+    @objc
+    func handle_card_pan(recognizer: UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            // Start Transition
+            break
+        case.changed:
+            // Update Transition
+            break
+        case .ended:
+            // Continue Transition
+            break
+        default:
+            break
+        }
+    }
+    
+    func start_interactive_transition(state: CardState, duration: TimeInterval) {
+        
+    }
+    
+    func update_interactive_transition(fraction_completed: CGFloat) {
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 
