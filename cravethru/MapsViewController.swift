@@ -19,17 +19,15 @@ class MapsViewController: UIViewController {
     var visual_effect_view: UIVisualEffectView!         // Blur Effect, animate intensity of blur
     
     let card_height: CGFloat = 600
-    let card_handle_area_height: CGFloat = 65
+    let card_handle_area_height: CGFloat = 200          // How much bottom sheet shows @ start
     
-    var card_visible = false
+    var card_visible = false                            // true = Expanded, false = collapsed
     var next_state: CardState {
         return card_visible ? .collapsed : .expanded
     }
     
-    // Array of animations
-    var running_animations = [UIViewPropertyAnimator]()
-    // Store progress of animations when it's interrupted
-    var animation_progress_when_interrupted: CGFloat = 0
+    var running_animations = [UIViewPropertyAnimator]()     // Array of animations
+    var animation_progress_when_interrupted: CGFloat = 0    // Store progress of animations when it's interrupted
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +36,18 @@ class MapsViewController: UIViewController {
     }
     
     func setup_card() {
-        visual_effect_view = UIVisualEffectView()
-        visual_effect_view.frame = self.view.frame
+        // Blur Effect
+        visual_effect_view = UIVisualEffectView()   // Init blur effect
+        visual_effect_view.frame = self.view.frame  // Have effect be the same size as the view's frame
         self.view.addSubview(visual_effect_view)
         
-        // Load Card View Controller
-        card_view_controller = MapsCardViewController(nibName: "MapsCard", bundle: nil)
-        self.addChild(card_view_controller)
-        self.view.addSubview(card_view_controller.view)
+        // Load Maps Card View Controller
+        card_view_controller = MapsCardViewController(nibName: "MapsCard", bundle: nil) // Refers to: MapsCard.xib
+        self.addChild(card_view_controller)                                             // Allows it to be in the same screen as the Maps View
+        self.view.addSubview(card_view_controller.view)                                 // Shows the Maps Card View
         
-        card_view_controller.view.frame = CGRect(x: 0, y: self.view.frame.height - card_handle_area_height, width: self.view.bounds.width, height: card_height)
+        let y = self.view.frame.height - card_handle_area_height    // Takes the Maps View Height (Entire Screen)
+        card_view_controller.view.frame = CGRect(x: 0, y: y, width: self.view.bounds.width, height: card_height)
         
         card_view_controller.view.clipsToBounds = true
     }
