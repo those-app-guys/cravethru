@@ -6,11 +6,8 @@
 #       - Quotes required around for 1st arg.
 
 # Debug
-msg = $'\nCommit Message: $1'
-branch = $'Pushed To: $2\n'
-
-echo "$msg"
-echo "$branch"
+printf "\nCommit Message: $1\n"
+printf "Pushed To: $2\n\n"
 
 # Github Pushing
 git add .  
