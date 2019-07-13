@@ -18,22 +18,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maps View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wP-6K-9cf">
-                                <rect key="frame" x="145" y="201" width="84" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8JS-ke-0xb">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8JS-ke-0xb" firstAttribute="top" secondItem="vt4-qw-NOq" secondAttribute="top" id="33E-De-oM9"/>
+                            <constraint firstAttribute="bottom" secondItem="8JS-ke-0xb" secondAttribute="bottom" id="fIC-GN-Smo"/>
+                            <constraint firstItem="8JS-ke-0xb" firstAttribute="leading" secondItem="vt4-qw-NOq" secondAttribute="leading" id="g8E-8D-vZz"/>
+                            <constraint firstItem="vt4-qw-NOq" firstAttribute="trailing" secondItem="8JS-ke-0xb" secondAttribute="trailing" id="lCY-kk-0Ds"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vt4-qw-NOq"/>
                     </view>
                     <navigationItem key="navigationItem" id="tNj-Yz-7JC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTE-uT-fG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="931.88405797101461" y="121.875"/>
+            <point key="canvasLocation" x="930.39999999999998" y="121.18226600985223"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l2o-NW-USW">

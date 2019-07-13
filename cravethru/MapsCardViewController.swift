@@ -10,6 +10,8 @@ import UIKit
 
 class MapsCardViewController: UIViewController {
 
+    @IBOutlet weak var handle_view: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
