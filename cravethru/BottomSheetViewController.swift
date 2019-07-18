@@ -12,8 +12,18 @@ class BottomSheetViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.3) {
+            let frame = self.view.frame
+            let y_component = UIScreen.main.bounds.height - 200
+            self.view.frame = CGRect(x: 0, y: y_component, width: frame.width, height: frame.height)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +41,10 @@ class BottomSheetViewController: UIViewController {
         blurred_view.frame = UIScreen.main.bounds
         
         view.insertSubview(blurred_view, at: 0)
+    }
+    
+    @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
+        
     }
     
     /*
