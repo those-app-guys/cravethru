@@ -16,9 +16,9 @@
 		286B473C22D293DA007E3C51 /* cravethruTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B473B22D293DA007E3C51 /* cravethruTests.swift */; };
 		286B474722D293DA007E3C51 /* cravethruUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B474622D293DA007E3C51 /* cravethruUITests.swift */; };
 		286B475522D29DF4007E3C51 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 286B475422D29DF4007E3C51 /* Maps.storyboard */; };
-		286B475722D2A048007E3C51 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B475622D2A048007E3C51 /* MapsViewController.swift */; };
-		286B475922D3ED21007E3C51 /* MapsCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 286B475822D3ED21007E3C51 /* MapsCard.xib */; };
-		286B476122D3F79C007E3C51 /* MapsCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B476022D3F79C007E3C51 /* MapsCardViewController.swift */; };
+		286B476322DFFD9F007E3C51 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B476222DFFD9F007E3C51 /* MapsViewController.swift */; };
+		286B476622DFFDE7007E3C51 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */; };
+		286B476722DFFDE7007E3C51 /* BottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,9 +54,9 @@
 		286B474622D293DA007E3C51 /* cravethruUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cravethruUITests.swift; sourceTree = "<group>"; };
 		286B474822D293DA007E3C51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		286B475422D29DF4007E3C51 /* Maps.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Maps.storyboard; sourceTree = "<group>"; };
-		286B475622D2A048007E3C51 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
-		286B475822D3ED21007E3C51 /* MapsCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapsCard.xib; sourceTree = "<group>"; };
-		286B476022D3F79C007E3C51 /* MapsCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsCardViewController.swift; sourceTree = "<group>"; };
+		286B476222DFFD9F007E3C51 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
+		286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +111,9 @@
 				286B472822D293D9007E3C51 /* ViewController.swift */,
 				286B472A22D293D9007E3C51 /* Main.storyboard */,
 				286B475422D29DF4007E3C51 /* Maps.storyboard */,
-				286B475822D3ED21007E3C51 /* MapsCard.xib */,
-				286B475622D2A048007E3C51 /* MapsViewController.swift */,
-				286B476022D3F79C007E3C51 /* MapsCardViewController.swift */,
+				286B476222DFFD9F007E3C51 /* MapsViewController.swift */,
+				286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */,
+				286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */,
 				286B472D22D293DA007E3C51 /* Assets.xcassets */,
 				286B472F22D293DA007E3C51 /* LaunchScreen.storyboard */,
 				1D7B60EE22DCE3160098DBB0 /* Login.storyboard */,
@@ -244,9 +244,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				286B475922D3ED21007E3C51 /* MapsCard.xib in Resources */,
 				286B473122D293DA007E3C51 /* LaunchScreen.storyboard in Resources */,
+<<<<<<< HEAD
 				1D7B60EF22DCE3160098DBB0 /* Login.storyboard in Resources */,
+=======
+				286B476722DFFDE7007E3C51 /* BottomSheetViewController.xib in Resources */,
+>>>>>>> 4110b058a04dbaa6eb1d0b680854c47415bf2cd8
 				286B472E22D293DA007E3C51 /* Assets.xcassets in Resources */,
 				286B472C22D293D9007E3C51 /* Main.storyboard in Resources */,
 				286B475522D29DF4007E3C51 /* Maps.storyboard in Resources */,
@@ -274,10 +277,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				286B475722D2A048007E3C51 /* MapsViewController.swift in Sources */,
-				286B476122D3F79C007E3C51 /* MapsCardViewController.swift in Sources */,
+				286B476322DFFD9F007E3C51 /* MapsViewController.swift in Sources */,
 				286B472922D293D9007E3C51 /* ViewController.swift in Sources */,
 				286B472722D293D9007E3C51 /* AppDelegate.swift in Sources */,
+				286B476622DFFDE7007E3C51 /* BottomSheetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
