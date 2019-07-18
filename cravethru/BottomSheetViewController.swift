@@ -14,6 +14,7 @@ class BottomSheetViewController: UIViewController {
         super.viewDidLoad()
         
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
+        view.addGestureRecognizer(gesture)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,7 +45,11 @@ class BottomSheetViewController: UIViewController {
     }
     
     @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
+        let translation = recognizer.translation(in: self.view)
+        let y = self.view.frame.minY
         
+        self.view.frame = CGRect(x: 0, y: y + translation.y, width: view.frame.width, height: view.frame.height)
+        recognizer.setTranslation(CGPoint.zero, in: self.view)
     }
     
     /*

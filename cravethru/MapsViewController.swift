@@ -36,6 +36,9 @@ class MapsViewController: UIViewController {
         bottom_sheet_vc.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
     }
 
+    @IBAction func hello_button(_ sender: Any) {
+        print("Hello")
+    }
     /*
     // MARK: - Navigation
 
