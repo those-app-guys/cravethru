@@ -83,10 +83,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BXY-Zu-TRw"/>
                     </view>
+                    <connections>
+                        <segue destination="6KS-TP-FK7" kind="presentation" id="Gaa-Fb-WZ4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w25-1l-mgx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="89.855072463768124" y="55.580357142857139"/>
+        </scene>
+        <!--HomeViewController-->
+        <scene sceneID="UEh-cS-igc">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="HomeViewController" storyboardName="Home" referencedIdentifier="HomeViewController" id="6KS-TP-FK7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nJq-2g-pg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="738" y="54"/>
         </scene>
     </scenes>
     <resources>

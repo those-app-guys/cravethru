@@ -7,13 +7,24 @@
 //
 
 import UIKit
+import MapKit
 
 class MapsViewController: UIViewController {
 
+    let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // .delegate            -> Handles responses asynchronously. Needs an 'extension' to be: = self
+        // .request...Auth()    -> Triggers location permission dialog. User will see it once.
+        // .requestLocation()   -> Triggers one-time location request.
+        
+        location_manager.delegate = self
+        location_manager.desiredAccuracy = kCLLocationAccuracyBest
+        location_manager.requestWhenInUseAuthorization()
+        location_manager.requestLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,4 +60,39 @@ class MapsViewController: UIViewController {
     }
     */
 
+}
+
+/*
+ NOTES on what is going on BELOW:
+    - extension         -> Puts into class extension that in the class body. Organizes code to group
+                           related delegate methods
+ 
+    - locationManager(_:didChangeAuthStat)  -> Gets called when user responds to the permission dialog
+                                               If user chose "Allow", the tatus becomes:
+                                                    CLAuthorizationStatus.AuthorizedWhenInUse
+ 
+ */
+
+// Processes Location Manager responses (The Asynchronous ones)
+// Responses include:
+//      - Authorization & Location requests that were sent earlier in viewDidLoad
+extension MapsViewController : CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            // Trigger another requestLocation() b/c
+            // 1st attempt would have suffered a permission failure
+            location_manager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Only interested in the first location
+        if let location = locations.first {
+            print("\n\tLocation: \(location)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("\n\tError: \(error)")
+    }
 }

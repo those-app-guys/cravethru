@@ -50,6 +50,9 @@ class BottomSheetViewController: UIViewController {
         
         self.view.frame = CGRect(x: 0, y: y + translation.y, width: view.frame.width, height: view.frame.height)
         recognizer.setTranslation(CGPoint.zero, in: self.view)
+        
+        // Dismisses Keyboard
+        view.endEditing(true)
     }
     
     /*
