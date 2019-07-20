@@ -105,9 +105,12 @@ extension MapsViewController : CLLocationManagerDelegate {
         // Only interested in the first location
         if let user_location = locations.first {
             let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            
+            // Use's user's location go create region
             let region = MKCoordinateRegion(center: user_location.coordinate, span: span)
             
-            map_view.setRegion(region, animated: true)
+            // Sets Screen to user's location
+            map_view.setRegion(region, animated: false)
         }
     }
     

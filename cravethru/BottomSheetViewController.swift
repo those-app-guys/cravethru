@@ -10,9 +10,16 @@ import UIKit
 
 class BottomSheetViewController: UIViewController {
 
+    @IBOutlet weak var search_bar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.search_bar.delegate = self // Allows for use of delegate methods
+        search_bar.sizeToFit()
+        search_bar.placeholder = "Search for places"
+        
+        // Gesture for moving Bottom Sheet Up & Down
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
         view.addGestureRecognizer(gesture)
     }
@@ -44,7 +51,12 @@ class BottomSheetViewController: UIViewController {
         view.insertSubview(blurred_view, at: 0)
     }
     
+    @IBAction func bottom_sheet_pan_gesture(_ sender: Any) {
+        // Dismisses Keyboard
+        view.endEditing(true)
+    }
     @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
+        // Controls movement of bottom sheet
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY
         
@@ -54,6 +66,11 @@ class BottomSheetViewController: UIViewController {
         // Dismisses Keyboard
         view.endEditing(true)
     }
+    
+    @IBAction func search_bar_tap_gesture(_ sender: Any) {
+//        print("Tapped Search Bar")
+    }
+    
     
     /*
     // MARK: - Navigation
@@ -65,4 +82,19 @@ class BottomSheetViewController: UIViewController {
     }
     */
 
+}
+
+extension BottomSheetViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        print(searchText.isEmpty)
+//        if searchText == "" {
+//            print("Text = Empty | Tapped on Search Bar")
+//        } else {
+//            print("Nothing happening")
+//        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("Tapped Search Bar")
+    }
 }
