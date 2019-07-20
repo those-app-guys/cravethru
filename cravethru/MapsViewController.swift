@@ -12,6 +12,7 @@ import MapKit
 class MapsViewController: UIViewController {
 
     let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
+    @IBOutlet weak var map_view: MKMapView!
     
     
     override func viewDidLoad() {
@@ -76,6 +77,7 @@ class MapsViewController: UIViewController {
 // Processes Location Manager responses (The Asynchronous ones)
 // Responses include:
 //      - Authorization & Location requests that were sent earlier in viewDidLoad
+//      - Handles incoming location data
 extension MapsViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
@@ -85,10 +87,27 @@ extension MapsViewController : CLLocationManagerDelegate {
         }
     }
     
+    /*
+ 
+     Region
+     ________________        __
+     |              |        |
+     |              |        |
+     |              |       Span
+     |              |        |
+     |______________|        __
+     
+     |--------------|
+            Span
+    */
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Only interested in the first location
-        if let location = locations.first {
-            print("\n\tLocation: \(location)")
+        if let user_location = locations.first {
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            let region = MKCoordinateRegion(center: user_location.coordinate, span: span)
+            
+            map_view.setRegion(region, animated: true)
         }
     }
     

@@ -18,15 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-kp-mCV">
-                                <rect key="frame" x="0.0" y="88" width="375" height="647"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ad-kp-mCV">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <connections>
+                                    <outlet property="delegate" destination="1ej-s6-hAu" id="1zy-pu-qdG"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6ad-kp-mCV" firstAttribute="top" secondItem="vt4-qw-NOq" secondAttribute="top" id="7Vt-B3-0Xo"/>
+                            <constraint firstItem="6ad-kp-mCV" firstAttribute="trailing" secondItem="vt4-qw-NOq" secondAttribute="trailing" id="Q4T-dX-N6z"/>
+                            <constraint firstItem="6ad-kp-mCV" firstAttribute="leading" secondItem="vt4-qw-NOq" secondAttribute="leading" id="YXa-hQ-4pA"/>
+                            <constraint firstItem="vt4-qw-NOq" firstAttribute="bottom" secondItem="6ad-kp-mCV" secondAttribute="bottom" id="xqY-Ie-fmB"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vt4-qw-NOq"/>
                     </view>
                     <navigationItem key="navigationItem" id="tNj-Yz-7JC"/>
+                    <connections>
+                        <outlet property="map_view" destination="6ad-kp-mCV" id="vJU-er-Yao"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTE-uT-fG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="NFj-Oy-01f">
