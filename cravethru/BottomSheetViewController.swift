@@ -94,13 +94,16 @@ extension BottomSheetViewController : UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         print("Should Begin Editing")
         
-        let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
-        let bottom_sheet_height = self.view.frame.height
-        let maps_view_height = UIScreen.main.bounds.height
+        UIView.animate(withDuration: 0.3) {
+            let frame = self.view.frame
+            let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
+            let bottom_sheet_height = frame.height
+            let maps_view_height = UIScreen.main.bounds.height
+            
+            let y = maps_view_height - bottom_sheet_height + nav_bar_height
+            self.view.frame = CGRect(x: 0, y: y, width: frame.width, height: frame.height)
+        }
         
-        let y = maps_view_height - bottom_sheet_height + nav_bar_height
-        self.view.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: self.view.frame.height)
-        
-        return false    // True = Display Keyboard, False = Don't display
+        return true    // True = Display Keyboard, False = Don't display
     }
 }
