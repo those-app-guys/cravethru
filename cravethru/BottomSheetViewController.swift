@@ -17,7 +17,7 @@ class BottomSheetViewController: UIViewController {
         
         self.search_bar.delegate = self // Allows for use of delegate methods
         search_bar.sizeToFit()
-        search_bar.placeholder = "Search for places"
+        search_bar.placeholder = "Search for restaurants or areas"
         
         // Gesture for moving Bottom Sheet Up & Down
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
@@ -29,7 +29,7 @@ class BottomSheetViewController: UIViewController {
         
         UIView.animate(withDuration: 0.3) {
             let frame = self.view.frame
-            let y_component = UIScreen.main.bounds.height - 200
+            let y_component = UIScreen.main.bounds.height - 250
             self.view.frame = CGRect(x: 0, y: y_component, width: frame.width, height: frame.height)
         }
     }
@@ -55,13 +55,16 @@ class BottomSheetViewController: UIViewController {
         // Dismisses Keyboard
         view.endEditing(true)
     }
+    
+    // Controls movement of bottom sheet
     @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
-        // Controls movement of bottom sheet
         let translation = recognizer.translation(in: self.view)
-        let y = self.view.frame.minY
+        let y = self.view.frame.minY + translation.y
         
-        self.view.frame = CGRect(x: 0, y: y + translation.y, width: view.frame.width, height: view.frame.height)
+        self.view.frame = CGRect(x: 0, y: y, width: view.frame.width, height: view.frame.height)
         recognizer.setTranslation(CGPoint.zero, in: self.view)
+        
+        print(y)
         
         // Dismisses Keyboard
         view.endEditing(true)

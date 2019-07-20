@@ -38,7 +38,6 @@
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="leading" secondItem="WOg-MG-B2O" secondAttribute="leading" id="5c4-Bl-IxA"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="WOg-MG-B2O" secondAttribute="bottom" constant="-34" id="6Do-Qz-3ZF"/>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6Zs-5N-deH"/>
                 <constraint firstItem="WOg-MG-B2O" firstAttribute="top" secondItem="3kx-K5-heo" secondAttribute="bottom" id="FY6-9H-5TY"/>
                 <constraint firstItem="WOg-MG-B2O" firstAttribute="top" secondItem="3kx-K5-heo" secondAttribute="bottom" id="KqN-O7-WuI"/>
