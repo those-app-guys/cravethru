@@ -67,10 +67,6 @@ class BottomSheetViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @IBAction func search_bar_tap_gesture(_ sender: Any) {
-//        print("Tapped Search Bar")
-    }
-    
     
     /*
     // MARK: - Navigation
@@ -94,7 +90,17 @@ extension BottomSheetViewController : UISearchBarDelegate {
 //        }
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("Tapped Search Bar")
+    // Used for displaying "Keyboard" & Moving Bottom Sheet to top (e.g. Apple Maps)
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        print("Should Begin Editing")
+        
+        let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
+        let bottom_sheet_height = self.view.frame.height
+        let maps_view_height = UIScreen.main.bounds.height
+        
+        let y = maps_view_height - bottom_sheet_height + nav_bar_height
+        self.view.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: self.view.frame.height)
+        
+        return false    // True = Display Keyboard, False = Don't display
     }
 }

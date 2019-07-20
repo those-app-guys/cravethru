@@ -22,18 +22,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="3kx-K5-heo">
-                    <rect key="frame" x="0.0" y="15" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="UEH-pz-DCZ"/>
                     </constraints>
                     <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="VVX-Ry-fjj" appends="YES" id="LoV-bS-L7B"/>
-                    </connections>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WOg-MG-B2O">
-                    <rect key="frame" x="0.0" y="59" width="375" height="719"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="719"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -41,8 +38,8 @@
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="leading" secondItem="WOg-MG-B2O" secondAttribute="leading" id="5c4-Bl-IxA"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="WOg-MG-B2O" secondAttribute="bottom" id="6Do-Qz-3ZF"/>
-                <constraint firstItem="3kx-K5-heo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="6Zs-5N-deH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="WOg-MG-B2O" secondAttribute="bottom" constant="15" id="6Do-Qz-3ZF"/>
+                <constraint firstItem="3kx-K5-heo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6Zs-5N-deH"/>
                 <constraint firstItem="WOg-MG-B2O" firstAttribute="top" secondItem="3kx-K5-heo" secondAttribute="bottom" id="KqN-O7-WuI"/>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="trailing" secondItem="WOg-MG-B2O" secondAttribute="trailing" id="S9r-JZ-epA"/>
                 <constraint firstItem="WOg-MG-B2O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jT6-eC-ZPx"/>
@@ -56,10 +53,5 @@
                 <action selector="bottom_sheet_pan_gesture:" destination="-1" id="tyh-cP-YOa"/>
             </connections>
         </panGestureRecognizer>
-        <tapGestureRecognizer id="VVX-Ry-fjj">
-            <connections>
-                <action selector="search_bar_tap_gesture:" destination="-1" id="N3d-Yc-JNp"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>
