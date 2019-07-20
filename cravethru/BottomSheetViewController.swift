@@ -94,6 +94,7 @@ extension BottomSheetViewController : UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         print("Should Begin Editing")
         
+        // Animates moving Bottom Sheet to front
         UIView.animate(withDuration: 0.3) {
             let frame = self.view.frame
             let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
