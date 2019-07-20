@@ -61,10 +61,30 @@ class BottomSheetViewController: UIViewController {
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY + translation.y
         
+        
         self.view.frame = CGRect(x: 0, y: y, width: view.frame.width, height: view.frame.height)
         recognizer.setTranslation(CGPoint.zero, in: self.view)
         
         print(y)
+        
+        // Animating 2 Sections of the Bottom Sheet
+        //  - Section 1: Bottom
+        if y > UIScreen.main.bounds.height - 250 {
+            UIView.animate(withDuration: 0.3) {
+                let frame = self.view.frame
+                let y_component = UIScreen.main.bounds.height - 250
+                self.view.frame = CGRect(x: 0, y: y_component, width: frame.width, height: frame.height)
+            }
+        }
+        
+        //  - Section 2: Mid
+        else if y <= UIScreen.main.bounds.height - 250 {
+            UIView.animate(withDuration: 0.3) {
+                let frame = self.view.frame
+                let y_component = UIScreen.main.bounds.height - 100
+                self.view.frame = CGRect(x: 0, y: y_component, width: frame.width, height: frame.height)
+            }
+        }
         
         // Dismisses Keyboard
         view.endEditing(true)
