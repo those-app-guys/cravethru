@@ -92,8 +92,6 @@ extension BottomSheetViewController : UISearchBarDelegate {
     
     // Used for displaying "Keyboard" & Moving Bottom Sheet to top (e.g. Apple Maps)
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        print("Should Begin Editing")
-        
         // Animates moving Bottom Sheet to front
         UIView.animate(withDuration: 0.3) {
             let frame = self.view.frame
