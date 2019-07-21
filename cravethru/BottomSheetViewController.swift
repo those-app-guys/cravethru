@@ -21,6 +21,10 @@ class BottomSheetViewController: UIViewController {
         search_bar.sizeToFit()
         search_bar.placeholder = "Search for restaurants or areas"
         
+        // Makes corners of bottom sheet a little more rounded
+        view.layer.cornerRadius = 8;
+        view.layer.masksToBounds = true;    // Ensures rounded corners
+        
         // Gesture for moving Bottom Sheet Up & Down
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
         view.addGestureRecognizer(gesture)
