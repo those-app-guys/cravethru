@@ -60,20 +60,26 @@ class BottomSheetViewController: UIViewController {
     
     // Controls movement of bottom sheet
     @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
+        let bot = UIScreen.main.bounds.height - 100
+        
+        // Movement of Bottom Sheet
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY + translation.y
         
-        self.view.frame = CGRect(x: 0, y: y, width: view.frame.width, height: view.frame.height)
+        // Ensures bottom sheet does not go below the 'Bottom' section (Off screen below)
+        if y <= bot {
+            self.view.frame = CGRect(x: 0, y: y, width: view.frame.width, height: view.frame.height)
+        }
         
-        // Checks if user let go of pan gesture
-        let let_go_gesture = recognizer.state == .ended
-        
+        // Keep track of what section we started
+        //  - Helps understand what direction we're moving to (CMD + F for "initial_section" to its uses)
         if recognizer.state == .began {
             self.initial_section = y
         }
         
-        print(y)
         // Locate which section is belongs to
+        // Checks if user let go of pan gesture
+        let let_go_gesture = recognizer.state == .ended
         if  let_go_gesture {
             
             // Calculations for 'Top' Section
@@ -83,13 +89,16 @@ class BottomSheetViewController: UIViewController {
             let maps_view_height = UIScreen.main.bounds.height
             let move_down_extra: CGFloat = 50
             
-            //  - Section 1: Top    = 94.0
-            //  - Section 2: Mid    = 562.0
-            //  - Section 3: Bottom = 712.0
+            // Ex: iPhone X
+            //  - Top    = 94.0
+            //  - Mid    = 562.0
+            //  - Bottom = 712.0 (Variable declaration found in beginning of function)
             let top = maps_view_height - bottom_sheet_height + nav_bar_height + move_down_extra
             let mid = UIScreen.main.bounds.height - 250
-            let bot = UIScreen.main.bounds.height - 100
             
+            //  - Section 1: Top    = 94 to 562
+            //  - Section 2: Mid    = 562 to 712
+            //  - Section 3: Bottom = 712
             let above_top = y <= top
             let between_top_mid = y > top && y < mid
             let between_mid_bot = y > mid && y < bot
@@ -99,9 +108,8 @@ class BottomSheetViewController: UIViewController {
             let mid_to_top = initial_section > y && between_top_mid
             let top_to_mid = initial_section < y && between_top_mid
             
-            // Animating 2 Sections of the Bottom Sheet
+            // Animating Bottom Sheet movement after letting go
             if mid_to_top || above_top {
-//                print("Mid to Top -> Initial y = \(initial_section) | y = \(y) | UIScreen = \(UIScreen.main.bounds.height - 250)")
                 UIView.animate(withDuration: 0.3) {
                     self.view.frame = CGRect(x: 0, y: top, width: frame.width, height: frame.height)
                 }
@@ -110,19 +118,20 @@ class BottomSheetViewController: UIViewController {
                     self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
                 }
             } else if mid_to_bottom {
-//                print("Mid to Bottom -> Initial y = \(initial_section) < y = \(y) |  UIScreen = \(UIScreen.main.bounds.height - 250)")
                 UIView.animate(withDuration: 0.3) {
                     self.view.frame = CGRect(x: 0, y: bot, width: frame.width, height: frame.height)
                 }
             } else if bottom_to_mid {
-//                print("Bottom to Mid -> Initial y = \(initial_section) > y = \(y)  | UIScreen = \(UIScreen.main.bounds.height - 100)")
                 UIView.animate(withDuration: 0.3) {
                     self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
                 }
             }
         }
         
+        // Shows animation of moving bottom sheet
+        //  - (If commented out, it will move through ea. section really fast)
         recognizer.setTranslation(CGPoint.zero, in: self.view)
+        
         // Dismisses Keyboard
         view.endEditing(true)
     }
