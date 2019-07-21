@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -12,36 +12,47 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BottomSheetViewController" customModule="cravethru" customModuleProvider="target">
             <connections>
+                <outlet property="search_bar" destination="3kx-K5-heo" id="vyH-Ef-yyd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3kx-K5-heo">
-                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="3kx-K5-heo">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="UEH-pz-DCZ"/>
+                    </constraints>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hi2-aV-jgH">
-                    <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aP-rR-bWF">
-                            <rect key="frame" x="186" y="394" width="62" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="0.98640026110000001" blue="0.50982756279999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eah-ga-ItY">
+                    <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="separatorColor" red="1" green="0.98640026110000001" blue="0.50982756279999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="3kx-K5-heo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6Zs-5N-deH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eah-ga-ItY" secondAttribute="trailing" id="9ul-ua-Vmf"/>
+                <constraint firstItem="eah-ga-ItY" firstAttribute="top" secondItem="3kx-K5-heo" secondAttribute="bottom" id="D6P-dh-U3S"/>
+                <constraint firstItem="3kx-K5-heo" firstAttribute="leading" secondItem="eah-ga-ItY" secondAttribute="leading" id="Jf1-Fy-sv2"/>
+                <constraint firstItem="eah-ga-ItY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Jqd-K0-ztH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eah-ga-ItY" secondAttribute="bottom" id="MFz-ac-DWw"/>
+                <constraint firstItem="3kx-K5-heo" firstAttribute="trailing" secondItem="eah-ga-ItY" secondAttribute="trailing" id="nF2-ea-f5I"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="136.80000000000001" y="131.52709359605913"/>
         </view>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="qnC-Kp-thd">
+            <connections>
+                <action selector="bottom_sheet_pan_gesture:" destination="-1" id="tyh-cP-YOa"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
 </document>
