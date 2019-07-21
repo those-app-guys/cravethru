@@ -29,24 +29,22 @@
                     </constraints>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WOg-MG-B2O">
-                    <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eah-ga-ItY">
+                    <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="separatorColor" red="1" green="0.98640026110000001" blue="0.50982756279999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="3kx-K5-heo" firstAttribute="leading" secondItem="WOg-MG-B2O" secondAttribute="leading" id="5c4-Bl-IxA"/>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6Zs-5N-deH"/>
-                <constraint firstItem="WOg-MG-B2O" firstAttribute="top" secondItem="3kx-K5-heo" secondAttribute="bottom" id="FY6-9H-5TY"/>
-                <constraint firstItem="WOg-MG-B2O" firstAttribute="top" secondItem="3kx-K5-heo" secondAttribute="bottom" id="KqN-O7-WuI"/>
-                <constraint firstItem="3kx-K5-heo" firstAttribute="trailing" secondItem="WOg-MG-B2O" secondAttribute="trailing" id="S9r-JZ-epA"/>
-                <constraint firstItem="WOg-MG-B2O" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="bR8-hg-AhL"/>
-                <constraint firstItem="WOg-MG-B2O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jT6-eC-ZPx"/>
-                <constraint firstItem="WOg-MG-B2O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="oCP-DY-yhl"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WOg-MG-B2O" secondAttribute="trailing" id="sLF-rX-Cw0"/>
-                <constraint firstAttribute="bottom" secondItem="WOg-MG-B2O" secondAttribute="bottom" id="yzd-sH-oWU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eah-ga-ItY" secondAttribute="trailing" id="9ul-ua-Vmf"/>
+                <constraint firstItem="eah-ga-ItY" firstAttribute="top" secondItem="3kx-K5-heo" secondAttribute="bottom" id="D6P-dh-U3S"/>
+                <constraint firstItem="3kx-K5-heo" firstAttribute="leading" secondItem="eah-ga-ItY" secondAttribute="leading" id="Jf1-Fy-sv2"/>
+                <constraint firstItem="eah-ga-ItY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Jqd-K0-ztH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eah-ga-ItY" secondAttribute="bottom" id="MFz-ac-DWw"/>
+                <constraint firstItem="3kx-K5-heo" firstAttribute="trailing" secondItem="eah-ga-ItY" secondAttribute="trailing" id="nF2-ea-f5I"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="136.80000000000001" y="131.52709359605913"/>

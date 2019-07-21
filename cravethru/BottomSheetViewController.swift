@@ -8,10 +8,13 @@
 
 import UIKit
 
-class BottomSheetViewController: UIViewController {
+class BottomSheetViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var search_bar: UISearchBar!
-    
+    @IBOutlet weak var table_view: UITableView!
+
+    var numbers = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"]
+
     var initial_section: CGFloat = 0
     
     override func viewDidLoad() {
@@ -20,9 +23,9 @@ class BottomSheetViewController: UIViewController {
         self.search_bar.delegate = self // Allows for use of delegate methods
         search_bar.sizeToFit()
         search_bar.placeholder = "Search for restaurants or areas"
-        
+                
         // Makes corners of bottom sheet a little more rounded
-        view.layer.cornerRadius = 8;
+        view.layer.cornerRadius = 15;
         view.layer.masksToBounds = true;    // Ensures rounded corners
         
         // Gesture for moving Bottom Sheet Up & Down
@@ -140,7 +143,6 @@ class BottomSheetViewController: UIViewController {
         view.endEditing(true)
     }
     
-    
     /*
     // MARK: - Navigation
 
@@ -150,7 +152,6 @@ class BottomSheetViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 extension BottomSheetViewController : UISearchBarDelegate {
