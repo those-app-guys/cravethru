@@ -122,9 +122,13 @@ class BottomSheetViewController: UIViewController {
         let maps_view_height = UIScreen.main.bounds.height
         let move_down_extra: CGFloat = 50
         
-        // 2/3 Sections
-        let bot = UIScreen.main.bounds.height - 100
+        // Ex: iPhone X
+        //  - Top    = 94.0
+        //  - Mid    = 562.0
+        //  - Bottom = 712.0 (Variable declaration found in beginning of function)
         let top = maps_view_height - bottom_sheet_height + nav_bar_height + move_down_extra
+        let mid = UIScreen.main.bounds.height - 250
+        let bot = UIScreen.main.bounds.height - 100
         
         // Movement of Bottom Sheet
         let translation = recognizer.translation(in: self.view)
@@ -135,39 +139,36 @@ class BottomSheetViewController: UIViewController {
             self.view.frame = CGRect(x: 0, y: y, width: view.frame.width, height: view.frame.height)
         }
         
+        //  - Section 1: Top    = 94 to 562
+        //  - Section 2: Mid    = 562 to 712
+        //  - Section 3: Bottom = 712
+        let above_top = y <= top
+        let between_top_mid = y > top && y < mid
+        let between_mid_bot = y > mid && y < bot
+        
         // Keep track of what section we started
         //  - Helps understand what direction we're moving to (CMD + F for "initial_section" to its uses)
         if recognizer.state == .began {
             self.initial_section = y
         }
         
+        let mid_to_bottom = initial_section < y && between_mid_bot
+        let bottom_to_mid = initial_section > y && between_mid_bot
+        let mid_to_top = initial_section > y && between_top_mid
+        let top_to_mid = initial_section < y && between_top_mid
+        
         // Ensures when Bottom Sheet moves from "bottom" section
         // to display table view
-        self.table_view.isHidden = false
+        if y < bot {
+            self.table_view.isHidden = false
+        } else {
+            self.table_view.isHidden = true
+        }
         
         // Locate which section is belongs to
         // Checks if user let go of pan gesture
         let let_go_gesture = recognizer.state == .ended
         if  let_go_gesture {
-            // Ex: iPhone X
-            //  - Top    = 94.0
-            //  - Mid    = 562.0
-            //  - Bottom = 712.0 (Variable declaration found in beginning of function)
-            let top = maps_view_height - bottom_sheet_height + nav_bar_height + move_down_extra
-            let mid = UIScreen.main.bounds.height - 250
-            
-            //  - Section 1: Top    = 94 to 562
-            //  - Section 2: Mid    = 562 to 712
-            //  - Section 3: Bottom = 712
-            let above_top = y <= top
-            let between_top_mid = y > top && y < mid
-            let between_mid_bot = y > mid && y < bot
-            
-            let mid_to_bottom = initial_section < y && between_mid_bot
-            let bottom_to_mid = initial_section > y && between_mid_bot
-            let mid_to_top = initial_section > y && between_top_mid
-            let top_to_mid = initial_section < y && between_top_mid
-            
             // Animating Bottom Sheet movement after letting go
             if mid_to_top || above_top {
                 UIView.animate(withDuration: animation_duration) {
@@ -187,9 +188,6 @@ class BottomSheetViewController: UIViewController {
                     self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
                 }
             } else {
-                // Helps with hiding the table view
-                // when user moves bottom sheet from
-                // "top" to "bottom" section
                 self.table_view.isHidden = true
             }
         }
