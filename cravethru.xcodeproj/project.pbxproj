@@ -102,8 +102,8 @@
 		280775BF22ED2AD900167F51 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				280775C022ED2AF200167F51 /* BottomSheetTableViewCell.swift */,
 				280775C122ED2AF200167F51 /* BottomSheetTableViewCell.xib */,
+				280775C022ED2AF200167F51 /* BottomSheetTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
