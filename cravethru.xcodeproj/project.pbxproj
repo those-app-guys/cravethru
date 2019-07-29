@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280775C222ED2AF200167F51 /* BottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280775C022ED2AF200167F51 /* BottomSheetTableViewCell.swift */; };
+		280775C322ED2AF200167F51 /* BottomSheetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280775C122ED2AF200167F51 /* BottomSheetTableViewCell.xib */; };
 		286B472722D293D9007E3C51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B472622D293D9007E3C51 /* AppDelegate.swift */; };
 		286B472922D293D9007E3C51 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B472822D293D9007E3C51 /* HomeViewController.swift */; };
 		286B472C22D293D9007E3C51 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 286B472A22D293D9007E3C51 /* Home.storyboard */; };
@@ -40,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		1D7B60EE22DCE3160098DBB0 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		280775C022ED2AF200167F51 /* BottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTableViewCell.swift; sourceTree = "<group>"; };
+		280775C122ED2AF200167F51 /* BottomSheetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTableViewCell.xib; sourceTree = "<group>"; };
 		286B472322D293D9007E3C51 /* cravethru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cravethru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		286B472622D293D9007E3C51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		286B472822D293D9007E3C51 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +88,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		280775BE22ED2A7600167F51 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				280775C422ED2AF800167F51 /* TableView */,
+				280775BF22ED2AD900167F51 /* TableViewCell */,
+				286B475422D29DF4007E3C51 /* Maps.storyboard */,
+				286B476222DFFD9F007E3C51 /* MapsViewController.swift */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
+		280775BF22ED2AD900167F51 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				280775C122ED2AF200167F51 /* BottomSheetTableViewCell.xib */,
+				280775C022ED2AF200167F51 /* BottomSheetTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		280775C422ED2AF800167F51 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */,
+				286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
 		286B471A22D293D9007E3C51 = {
 			isa = PBXGroup;
 			children = (
@@ -111,10 +144,7 @@
 				286B472822D293D9007E3C51 /* HomeViewController.swift */,
 				1D7B60EE22DCE3160098DBB0 /* Login.storyboard */,
 				286B472A22D293D9007E3C51 /* Home.storyboard */,
-				286B475422D29DF4007E3C51 /* Maps.storyboard */,
-				286B476222DFFD9F007E3C51 /* MapsViewController.swift */,
-				286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */,
-				286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */,
+				280775BE22ED2A7600167F51 /* Maps */,
 				286B472D22D293DA007E3C51 /* Assets.xcassets */,
 				286B472F22D293DA007E3C51 /* LaunchScreen.storyboard */,
 				286B473222D293DA007E3C51 /* Info.plist */,
@@ -249,6 +279,7 @@
 				286B476722DFFDE7007E3C51 /* BottomSheetViewController.xib in Resources */,
 				286B472E22D293DA007E3C51 /* Assets.xcassets in Resources */,
 				286B472C22D293D9007E3C51 /* Home.storyboard in Resources */,
+				280775C322ED2AF200167F51 /* BottomSheetTableViewCell.xib in Resources */,
 				286B475522D29DF4007E3C51 /* Maps.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +308,7 @@
 				286B476322DFFD9F007E3C51 /* MapsViewController.swift in Sources */,
 				286B472922D293D9007E3C51 /* HomeViewController.swift in Sources */,
 				286B472722D293D9007E3C51 /* AppDelegate.swift in Sources */,
+				280775C222ED2AF200167F51 /* BottomSheetTableViewCell.swift in Sources */,
 				286B476622DFFDE7007E3C51 /* BottomSheetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,7 +491,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = thoseappguys.cravethru;
+				PRODUCT_BUNDLE_IDENTIFIER = "those-app-guys.cravethru";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,7 +509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = thoseappguys.cravethru;
+				PRODUCT_BUNDLE_IDENTIFIER = "those-app-guys.cravethru";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
