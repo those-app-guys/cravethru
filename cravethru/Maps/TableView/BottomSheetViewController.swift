@@ -8,22 +8,26 @@
 
 import UIKit
 
-class BottomSheetViewController: UIViewController, UITableViewDelegate {
+class BottomSheetViewController: UIViewController {
 
     @IBOutlet weak var search_bar: UISearchBar!
     @IBOutlet weak var table_view: UITableView!
 
-    var numbers = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"]
-
+    var users = ["Sujang", "Ray", "Joe", "RJ", "Jose", "Raju", "Dalanna", "Erick", "Francel"]
+    
     var initial_section: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.search_bar.delegate = self // Allows for use of delegate methods
+        search_bar.delegate = self // Allows for use of delegate methods
         search_bar.sizeToFit()
         search_bar.placeholder = "Search for restaurants or areas"
-                
+        
+        // tableView.register(UINib(nibName: "CustomCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
+//        table_view.register(UINib(nibName: "BottomSheetTableViewCell", bundle: nil), forCellReuseIdentifier: "BottomSheetTableViewCell")
+        setup_component()
+        
         // Makes corners of bottom sheet a little more rounded
         view.layer.cornerRadius = 15;
         view.layer.masksToBounds = true;    // Ensures rounded corners
@@ -46,6 +50,12 @@ class BottomSheetViewController: UIViewController, UITableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         prepare_background_view()
+    }
+    
+    func setup_component() {
+        table_view.rowHeight = UITableView.automaticDimension
+        table_view.estimatedRowHeight = 44
+        table_view.register(UINib(nibName: "BottomSheetTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
 
     func prepare_background_view() {
@@ -180,4 +190,20 @@ extension BottomSheetViewController : UISearchBarDelegate {
         
         return true    // True = Display Keyboard, False = Don't display
     }
+}
+
+extension BottomSheetViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BottomSheetTableViewCell
+        
+        cell.name_label.text = users[indexPath.row]
+        
+        return cell
+    }
+    
+    
 }
