@@ -54,7 +54,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="UxQ-F8-bI1" kind="presentation" id="URL-99-lVw"/>
+                                            <action selector="onSignUp:" destination="MWt-Do-dwr" eventType="touchUpInside" id="eXC-Yc-6mu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -93,18 +93,26 @@
                         <viewLayoutGuide key="safeArea" id="yTz-7p-ynb"/>
                     </view>
                     <navigationItem key="navigationItem" id="JGr-Gv-jpU"/>
+                    <connections>
+                        <outlet property="confirmPassTextField" destination="7uZ-3u-dEt" id="rx5-id-RyO"/>
+                        <outlet property="emailTextField" destination="roX-WD-wfB" id="OHX-Yi-xSA"/>
+                        <outlet property="firstNameTextField" destination="NJ7-sV-ViR" id="6I4-jB-dnQ"/>
+                        <outlet property="lastNameTextField" destination="qV6-4n-XnH" id="QZh-jS-zYu"/>
+                        <outlet property="passwordTextField" destination="Gtc-lG-frd" id="fLl-sa-D2c"/>
+                        <segue destination="M6y-Jl-jnQ" kind="presentation" identifier="BackToLogin" id="hhK-Mc-U9l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Evw-UW-D9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1062.3188405797102" y="38.839285714285715"/>
         </scene>
         <!--Login-->
-        <scene sceneID="FZQ-FU-eDa">
+        <scene sceneID="cTK-ne-HlC">
             <objects>
-                <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="Login" id="UxQ-F8-bI1" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qvZ-5y-7Ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Login" id="M6y-Jl-jnQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Adl-ye-KSU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1853" y="39"/>
+            <point key="canvasLocation" x="1904" y="39"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="X1S-yF-zPE">
