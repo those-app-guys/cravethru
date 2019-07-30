@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>384621707893-30qnrmng4kjpjbtqem8viq1b13jaaof9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.384621707893-30qnrmng4kjpjbtqem8viq1b13jaaof9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDhMopbofp911NRmAJYEMB263sTk5HowqI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>384621707893</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>those-app-guys.cravethru</string>
+	<key>PROJECT_ID</key>
+	<string>crave-thru-8d12f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>crave-thru-8d12f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:384621707893:ios:8083d1a765f94262</string>
+	<key>DATABASE_URL</key>
+	<string>https://crave-thru-8d12f.firebaseio.com</string>
+</dict>
+</plist>
