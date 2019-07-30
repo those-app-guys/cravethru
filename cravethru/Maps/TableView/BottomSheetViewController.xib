@@ -62,15 +62,5 @@
                 <action selector="bottom_sheet_pan_gesture:" destination="-1" id="tyh-cP-YOa"/>
             </connections>
         </panGestureRecognizer>
-        <visualEffectView opaque="NO" contentMode="scaleToFill" id="nC5-JD-gpm">
-            <rect key="frame" x="0.0" y="0.0" width="290" height="381"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KIr-gB-iBT">
-                <rect key="frame" x="0.0" y="0.0" width="290" height="381"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            </view>
-            <blurEffect style="light"/>
-            <point key="canvasLocation" x="-454.39999999999998" y="-182.14285714285714"/>
-        </visualEffectView>
     </objects>
 </document>

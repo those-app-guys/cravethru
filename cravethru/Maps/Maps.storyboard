@@ -36,6 +36,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="tNj-Yz-7JC"/>
                     <connections>
+                        <outlet property="dim_view" destination="ocV-uc-wjv" id="aTL-Px-Fte"/>
                         <outlet property="map_view" destination="6ad-kp-mCV" id="vJU-er-Yao"/>
                     </connections>
                 </viewController>
@@ -45,6 +46,12 @@
                         <action selector="maps_view_on_tap:" destination="1ej-s6-hAu" id="hkv-9c-wLT"/>
                     </connections>
                 </tapGestureRecognizer>
+                <view contentMode="scaleToFill" id="ocV-uc-wjv">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="mF2-k3-Snf"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="930.39999999999998" y="121.18226600985223"/>
         </scene>

@@ -18,6 +18,10 @@ class BottomSheetViewController: UIViewController {
     var initial_section: CGFloat = 0
     
     let animation_duration = 0.3
+    // we set a variable to hold the contentOffSet before scroll view scrolls
+    var lastContentOffset: CGFloat = 0
+    
+    var is_at_top = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,7 +138,7 @@ class BottomSheetViewController: UIViewController {
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY + translation.y
 
-        // Ensures bottom sheet does not go below the 'Bottom' & 'Top' section (Off screen below & Blocks the Maps View on top)
+        // Ensures bottom sheet does not go below the 'Bottom' & above 'Top' section (Off screen below & Blocks the Maps View on top)
         if y <= bot && y >= top - (top/3) {
             self.view.frame = CGRect(x: 0, y: y, width: view.frame.width, height: view.frame.height)
         }
@@ -165,15 +169,25 @@ class BottomSheetViewController: UIViewController {
             self.table_view.isHidden = true
         }
         
+        // Animates dim effect in Maps View
+        if mid_to_top || above_top {
+            NotificationCenter.default.post(name: Notification.Name("dim_on"), object: nil, userInfo: nil)
+        } else {
+            NotificationCenter.default.post(name: Notification.Name("dim_off"), object: nil, userInfo: nil)
+        }
+        
         // Locate which section is belongs to
         // Checks if user let go of pan gesture
         let let_go_gesture = recognizer.state == .ended
         if  let_go_gesture {
+            is_at_top = false
+            
             // Animating Bottom Sheet movement after letting go
             if mid_to_top || above_top {
                 UIView.animate(withDuration: animation_duration) {
                     self.view.frame = CGRect(x: 0, y: top, width: frame.width, height: frame.height)
                 }
+                is_at_top = true
             } else if top_to_mid {
                 UIView.animate(withDuration: animation_duration) {
                     self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
@@ -190,6 +204,7 @@ class BottomSheetViewController: UIViewController {
             } else {
                 self.table_view.isHidden = true
             }
+            print("Is at Top: \(is_at_top)")
         }
         
         // Shows animation of moving bottom sheet
@@ -254,7 +269,38 @@ extension BottomSheetViewController : UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    // this delegate is called when the scrollView (i.e your UITableView) will start scrolling
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.lastContentOffset = scrollView.contentOffset.y
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        if (self.lastContentOffset < scrollView.contentOffset.y) {
+            // did move up
+            print("Moved UP: \(self.lastContentOffset) < \(scrollView.contentOffset.y)")
+        } else if (self.lastContentOffset > scrollView.contentOffset.y) {
+            // did move down
+            if is_at_top && self.lastContentOffset <= 0 {
+                scrollView.bounces = false
+            } else {
+                scrollView.bounces = true
+            }
+            print("Moved DOWN: \(self.lastContentOffset) > \(scrollView.contentOffset.y)")
+        } else {
+            // didn't move
+            print("NO MOVEMENT")
+        }
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        if targetContentOffset.pointee.y < scrollView.contentOffset.y {
+//            // it's going up
+//            print("UP")
+//            scrollView.bounces = true
+//        } else {
+//            // it's going down
+//            print("DOWN")
+//            scrollView.bounces = false
+//        }
     }
 }
