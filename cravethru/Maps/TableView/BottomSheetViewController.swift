@@ -15,12 +15,10 @@ class BottomSheetViewController: UIViewController {
     
     var users = ["Sujang", "Ray", "Joe", "RJ", "Jose", "Raju", "Dalanna", "Erick", "Francel"]
     
-    var initial_section: CGFloat = 0
-    
     let animation_duration = 0.3
+    
     // we set a variable to hold the contentOffSet before scroll view scrolls
     var lastContentOffset: CGFloat = 0
-    
     var is_at_top = false
     
     override func viewDidLoad() {
@@ -31,8 +29,6 @@ class BottomSheetViewController: UIViewController {
         search_bar.placeholder = "Search for restaurants or areas"
         
         setup_table_view()
-        
-        
         
         // Makes corners of bottom sheet a little more rounded
         view.layer.cornerRadius = 15;
@@ -119,8 +115,13 @@ class BottomSheetViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // Controls movement of bottom sheet
-    @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
+    func animate_to_section(section: CGFloat) {
+        UIView.animate(withDuration: animation_duration) {
+            self.view.frame = CGRect(x: 0, y: section, width: self.view.frame.width, height: self.view.frame.height)
+        }
+    }
+    
+    func animate_bottom_sheet_movement(recognizer: UIPanGestureRecognizer) {
         // Calculations for 'Top' Section
         let frame = self.view.frame
         let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
@@ -139,7 +140,7 @@ class BottomSheetViewController: UIViewController {
         // Movement of Bottom Sheet
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY + translation.y
-
+        
         // Ensures bottom sheet does not go below the 'Bottom' & above 'Top' section (Off screen below & Blocks the Maps View on top)
         if y <= bot && y >= top - (top/3) {
             self.view.frame = CGRect(x: 0, y: y, width: view.frame.width, height: view.frame.height)
@@ -184,22 +185,14 @@ class BottomSheetViewController: UIViewController {
             
             // Animating Bottom Sheet movement after letting go
             if mid_to_top || above_top {
-                UIView.animate(withDuration: animation_duration) {
-                    self.view.frame = CGRect(x: 0, y: top, width: frame.width, height: frame.height)
-                }
+                animate_to_section(section: top)
                 is_at_top = true
-            } else if top_to_mid {
-                UIView.animate(withDuration: animation_duration) {
-                    self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
-                }
+            } else if top_to_mid || bottom_to_mid {
+                animate_to_section(section: mid)
             } else if mid_to_bottom {
                 UIView.animate(withDuration: animation_duration) {
                     self.view.frame = CGRect(x: 0, y: bot, width: frame.width, height: frame.height)
                     self.table_view.isHidden = true
-                }
-            } else if bottom_to_mid {
-                UIView.animate(withDuration: animation_duration) {
-                    self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
                 }
             } else {
                 self.table_view.isHidden = true
@@ -212,6 +205,11 @@ class BottomSheetViewController: UIViewController {
         
         // Dismisses Keyboard
         view.endEditing(true)
+    }
+    
+    // Controls movement of bottom sheet
+    @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
+        
     }
     
     /*
@@ -274,32 +272,12 @@ extension BottomSheetViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (self.lastContentOffset < scrollView.contentOffset.y) {
-            // did move up
-            print("Moved UP: \(self.lastContentOffset) < \(scrollView.contentOffset.y)")
-        } else if (self.lastContentOffset > scrollView.contentOffset.y) {
-            // did move down
-            if is_at_top && self.lastContentOffset <= 0 {
-                scrollView.bounces = false
-            } else {
-                scrollView.bounces = true
-            }
-            print("Moved DOWN: \(self.lastContentOffset) > \(scrollView.contentOffset.y)")
-        } else {
-            // didn't move
-            print("NO MOVEMENT")
+        print(scrollView.contentOffset.y)
+        
+        if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
+            let mid = UIScreen.main.bounds.height - 250
+            animate_to_section(section: mid)
         }
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        if targetContentOffset.pointee.y < scrollView.contentOffset.y {
-//            // it's going up
-//            print("UP")
-//            scrollView.bounces = true
-//        } else {
-//            // it's going down
-//            print("DOWN")
-//            scrollView.bounces = false
-//        }
     }
 }
