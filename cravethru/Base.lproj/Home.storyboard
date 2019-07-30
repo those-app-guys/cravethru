@@ -32,7 +32,7 @@
                     <navigationItem key="navigationItem" id="h7c-qa-Nc7">
                         <barButtonItem key="rightBarButtonItem" title="Maps" id="uCh-0H-Xnp">
                             <connections>
-                                <segue destination="363-bF-ifg" kind="presentation" id="08C-OT-KYQ"/>
+                                <segue destination="363-bF-ifg" kind="show" id="08C-OT-KYQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
