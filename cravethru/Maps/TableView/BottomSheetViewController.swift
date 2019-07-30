@@ -152,16 +152,14 @@ class BottomSheetViewController: UIViewController {
         let between_top_mid = y > top && y < mid
         let between_mid_bot = y > mid && y < bot
         
-        // Keep track of what section we started
-        //  - Helps understand what direction we're moving to (CMD + F for "initial_section" to its uses)
-        if recognizer.state == .began {
-            self.initial_section = y
-        }
+        // See what direction user is moving the Bottom Sheet
+        let velocity = recognizer.velocity(in: self.view)
         
-        let mid_to_bottom = initial_section < y && between_mid_bot
-        let bottom_to_mid = initial_section > y && between_mid_bot
-        let mid_to_top = initial_section > y && between_top_mid
-        let top_to_mid = initial_section < y && between_top_mid
+        let is_going_up = velocity.y < 0 ? true : false
+        let mid_to_bottom = !is_going_up && between_mid_bot
+        let bottom_to_mid = is_going_up && between_mid_bot
+        let mid_to_top = is_going_up && between_top_mid
+        let top_to_mid = !is_going_up && between_top_mid
         
         // Ensures when Bottom Sheet moves from "bottom" section
         // to display table view
@@ -177,16 +175,6 @@ class BottomSheetViewController: UIViewController {
         } else {
             NotificationCenter.default.post(name: Notification.Name("dim_off"), object: nil, userInfo: nil)
         }
-        
-        // See what direction user is moving the Bottom Sheet
-        let velocity = recognizer.velocity(in: self.view)
-        
-        if velocity.y < 0 {
-            print("UP")
-        } else {
-            print("DOWN")
-        }
-        
         
         // Locate which section is belongs to
         // Checks if user let go of pan gesture
