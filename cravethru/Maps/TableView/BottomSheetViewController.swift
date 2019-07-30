@@ -32,6 +32,8 @@ class BottomSheetViewController: UIViewController {
         
         setup_table_view()
         
+        
+        
         // Makes corners of bottom sheet a little more rounded
         view.layer.cornerRadius = 15;
         view.layer.masksToBounds = true;    // Ensures rounded corners
@@ -176,6 +178,16 @@ class BottomSheetViewController: UIViewController {
             NotificationCenter.default.post(name: Notification.Name("dim_off"), object: nil, userInfo: nil)
         }
         
+        // See what direction user is moving the Bottom Sheet
+        let velocity = recognizer.velocity(in: self.view)
+        
+        if velocity.y < 0 {
+            print("UP")
+        } else {
+            print("DOWN")
+        }
+        
+        
         // Locate which section is belongs to
         // Checks if user let go of pan gesture
         let let_go_gesture = recognizer.state == .ended
@@ -204,7 +216,6 @@ class BottomSheetViewController: UIViewController {
             } else {
                 self.table_view.isHidden = true
             }
-            print("Is at Top: \(is_at_top)")
         }
         
         // Shows animation of moving bottom sheet

@@ -30,7 +30,7 @@
                     </constraints>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eah-ga-ItY">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eah-ga-ItY">
                     <rect key="frame" x="0.0" y="54" width="375" height="901"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,7 +48,6 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eah-ga-ItY" secondAttribute="trailing" id="9ul-ua-Vmf"/>
                 <constraint firstItem="eah-ga-ItY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E0p-f1-YzX"/>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="leading" secondItem="eah-ga-ItY" secondAttribute="leading" id="Jf1-Fy-sv2"/>
-                <constraint firstItem="eah-ga-ItY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Jqd-K0-ztH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eah-ga-ItY" secondAttribute="bottom" constant="-177" id="MFz-ac-DWw"/>
                 <constraint firstItem="eah-ga-ItY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Ziv-WC-M3u"/>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="frQ-vq-49x"/>
