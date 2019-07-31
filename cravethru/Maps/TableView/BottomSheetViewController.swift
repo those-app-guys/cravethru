@@ -21,6 +21,8 @@ class BottomSheetViewController: UIViewController {
     var lastContentOffset: CGFloat = 0
     var is_at_top = false
     
+    var recognizer = UIPanGestureRecognizer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,8 +37,8 @@ class BottomSheetViewController: UIViewController {
         view.layer.masksToBounds = true;    // Ensures rounded corners
         
         // Gesture for moving Bottom Sheet Up & Down
-        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
-        view.addGestureRecognizer(gesture)
+        recognizer = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
+        view.addGestureRecognizer(recognizer)
         
         // Blur Effect
         // 1
@@ -121,7 +123,8 @@ class BottomSheetViewController: UIViewController {
         }
     }
     
-    func animate_bottom_sheet_movement(recognizer: UIPanGestureRecognizer) {
+    // Controls movement of bottom sheet
+    @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
         // Calculations for 'Top' Section
         let frame = self.view.frame
         let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
@@ -207,11 +210,6 @@ class BottomSheetViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // Controls movement of bottom sheet
-    @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
-        
-    }
-    
     /*
      // MARK: - Navigation
      
@@ -264,20 +262,5 @@ extension BottomSheetViewController : UITableViewDelegate, UITableViewDataSource
         cell.backgroundColor = UIColor.clear
         
         return cell
-    }
-    
-    // this delegate is called when the scrollView (i.e your UITableView) will start scrolling
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.lastContentOffset = scrollView.contentOffset.y
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
-        
-        if scrollView.contentOffset.y < 0 {
-            scrollView.contentOffset.y = 0
-            let mid = UIScreen.main.bounds.height - 250
-            animate_to_section(section: mid)
-        }
     }
 }
