@@ -61,7 +61,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="6KS-TP-FK7" kind="show" id="D5F-WY-1CH"/>
+                                            <action selector="onLogin:" destination="hrB-Yj-CrY" eventType="touchUpInside" id="ShQ-YQ-YNu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -85,6 +85,13 @@
                                     <segue destination="B7I-yr-pok" kind="show" id="mAR-8i-Dzs"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please verify your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAB-nC-6O8">
+                                <rect key="frame" x="117" y="403" width="181" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BXY-Zu-TRw"/>
@@ -93,6 +100,8 @@
                     <connections>
                         <outlet property="emailTextField" destination="d00-Ia-2ci" id="wd1-Tc-Xtc"/>
                         <outlet property="passwordTextField" destination="Njl-gg-n21" id="BME-Bg-7s3"/>
+                        <outlet property="verifyError" destination="eAB-nC-6O8" id="SHP-Ie-itX"/>
+                        <segue destination="6KS-TP-FK7" kind="presentation" identifier="LoginSegue" id="Z5p-0u-pwT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w25-1l-mgx" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
-
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var verifyError: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         super.viewWillDisappear(true)
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
+    @IBAction func onLogin(_ sender: Any) {
+        let emailText = emailTextField.text!
+        let passwordText = passwordTextField.text!
+        
+        if emailText == "" && passwordText == ""{
+            self.performSegue(withIdentifier: "LoginSegue", sender: self)
+        }
+        
+        Auth.auth().signIn(withEmail: emailText, password: passwordText) {(user, error) in
+            if error != nil{
+                print (error!)
+            }
+            else if let user = Auth.auth().currentUser{
+                if !user.isEmailVerified{
+                    self.verifyError.textColor = UIColor.red
+                }
+                else{
+                    self.verifyError.textColor = UIColor.white
+                    self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                }
+            }
+        }
+    }
+    
 }
 
 extension UITextField{
