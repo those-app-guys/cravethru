@@ -90,11 +90,17 @@ class BottomSheetViewController: UIViewController {
         
         UIView.animate(withDuration: animation_duration) {
             let frame = self.view.frame
-            let y_component = frame.height - (frame.height * 0.3)
-            self.view.frame = CGRect(x: 0, y: y_component, width: frame.width, height: frame.height)
+            let mid = frame.height - (frame.height * 0.35)
+//            let mid: CGFloat = 0
+            self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
             
 //            print("UIScreen.main.bounds.height = \(frame.height - frame.height/3) | frame.height = \(self.view.frame.height)")
         }
+        let frame = self.view.frame
+        let mid = frame.height - (frame.height * 0.35)
+//        Mid: 582.4000000000001 | View Height: 896.0 | Phone Height: 896.0
+        print("Mid: \(mid) | View Height: \(frame.height) | Phone Height: \(UIScreen.main.bounds.height)")
+        table_view_bottom.constant = mid
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,7 +112,7 @@ class BottomSheetViewController: UIViewController {
         table_view.rowHeight = UITableView.automaticDimension
         table_view.estimatedRowHeight = 44
         table_view.register(UINib(nibName: "BottomSheetTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        table_view.tableFooterView = UIView(frame: .zero)
+        table_view.tableFooterView = UIView(frame: .zero) // Hides empty cells
     }
     
     func prepare_background_view() {
@@ -129,6 +135,7 @@ class BottomSheetViewController: UIViewController {
     func animate_to_section(section: CGFloat) {
         UIView.animate(withDuration: animation_duration) {
             self.view.frame = CGRect(x: 0, y: section, width: self.view.frame.width, height: self.view.frame.height)
+//            self.table_view_bottom.constant = section
         }
     }
     
@@ -140,7 +147,7 @@ class BottomSheetViewController: UIViewController {
         let bottom_sheet_height = frame.height
         
         let top = nav_bar_height + ((self.view.frame.height - nav_bar_height) * 0.15)
-        let mid = frame.height - (frame.height * 0.3)
+        let mid = frame.height - (frame.height * 0.35)
         let bot = bottom_sheet_height - (bottom_sheet_height * 0.13)
         
         // Movement of Bottom Sheet
@@ -191,8 +198,8 @@ class BottomSheetViewController: UIViewController {
             
             // Animating Bottom Sheet movement after letting go
             if mid_to_top || above_top {
-                animate_to_section(section: top)
                 is_at_top = true
+                animate_to_section(section: top)
             } else if top_to_mid || bottom_to_mid {
                 animate_to_section(section: mid)
             } else if mid_to_bottom {
@@ -209,27 +216,8 @@ class BottomSheetViewController: UIViewController {
         //  - (If commented out, it will move through ea. section really fast)
         recognizer.setTranslation(CGPoint.zero, in: self.view)
         
-        adjust_table_view_height()
-        
         // Dismisses Keyboard
         view.endEditing(true)
-    }
-    
-    func adjust_table_view_height() {
-//        print("Bottom Sheet Height: \(self.view.frame.height)")
-        
-//        self.view.frame.height * 2
-//        let cells_height: CGFloat = CGFloat(44 * users.count)
-//        let height: CGFloat = CGFloat(cells_height + )
-//        print(height)
-        
-//        table_view.contentSize.height = height
-//        let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
-        
-//        let top = nav_bar_height + ((self.view.frame.height - nav_bar_height) * 0.15)
-        let calc = self.view.frame.height * 0.20
-//        print("View Height: \(self.view.frame.height) - Top: \(top) | = \(calc)")
-        table_view_bottom.constant = calc
     }
     
     /*
@@ -260,6 +248,7 @@ extension BottomSheetViewController : UISearchBarDelegate {
             let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
             let top = nav_bar_height + ((self.view.frame.height - nav_bar_height) * 0.15)
             self.view.frame = CGRect(x: 0, y: top, width: self.view.frame.width, height: self.view.frame.height)
+            self.table_view_bottom.constant = top // Allows the scroll view to scroll through all cells
         }
         NotificationCenter.default.post(name: Notification.Name("dim_on"), object: nil, userInfo: nil)
         self.table_view.isHidden = false
