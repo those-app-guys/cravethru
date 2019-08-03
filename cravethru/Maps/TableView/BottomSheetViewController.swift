@@ -136,19 +136,13 @@ class BottomSheetViewController: UIViewController {
         let frame = self.view.frame
         let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
         let bottom_sheet_height = frame.height
-        let move_down_extra: CGFloat = 50
         
-        // Ex: iPhone X
-        //  - Top    = 94.0
-        //  - Mid    = 562.0
-        //  - Bottom = 712.0 (Variable declaration found in beginning of function)
-        let top = nav_bar_height + move_down_extra
+        let calc = (nav_bar_height * 1.7)
+        let top = nav_bar_height + calc
         let mid = frame.height - (frame.height * 0.3)
+        let bot = bottom_sheet_height - (bottom_sheet_height * 0.13)
         
-        let calc = (bottom_sheet_height * 0.13)
-        let bot = bottom_sheet_height - calc
-        
-        print("\(bottom_sheet_height) - \(calc) = \(bot)")
+        print("\(nav_bar_height) + \(calc) = \(top)")
         
         // Movement of Bottom Sheet
         let translation = recognizer.translation(in: self.view)
@@ -245,15 +239,12 @@ extension BottomSheetViewController : UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         // Animates moving Bottom Sheet to front
         UIView.animate(withDuration: animation_duration) {
-            let frame = self.view.frame
             let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
-            let bottom_sheet_height = frame.height
-            let maps_view_height = UIScreen.main.bounds.height
-            let move_down_extra: CGFloat = 50
-            
-            let y = maps_view_height - bottom_sheet_height + nav_bar_height + move_down_extra
-            self.view.frame = CGRect(x: 0, y: y, width: frame.width, height: frame.height)
+            let calc = (nav_bar_height * 1.7)
+            let top = nav_bar_height + (self.view.frame.height - nav_bar_height)
+            self.view.frame = CGRect(x: 0, y: top, width: self.view.frame.width, height: self.view.frame.height)
         }
+        NotificationCenter.default.post(name: Notification.Name("dim_on"), object: nil, userInfo: nil)
         self.table_view.isHidden = false
         
         return true    // True = Display Keyboard, False = Don't display
