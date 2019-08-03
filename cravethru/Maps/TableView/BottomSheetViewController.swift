@@ -13,7 +13,12 @@ class BottomSheetViewController: UIViewController {
     @IBOutlet weak var search_bar: UISearchBar!
     @IBOutlet weak var table_view: UITableView!
     
-    var users = ["Sujang", "Ray", "Joe", "RJ", "Jose", "Raju", "Dalanna", "Erick", "Francel"]
+    var users = ["First Cell", "Ray", "Joe", "RJ", "Jose", "Raju", "Dalanna", "Erick", "Francel",
+                 "Jose", "Raju", "Dalanna", "Erick", "Francel",
+                 "Jose", "Raju", "Dalanna", "Erick", "Francel",
+                 "Jose", "Raju", "Dalanna", "Erick", "Francel",
+                 "Jose", "Raju", "Dalanna", "Erick", "Last Cell"
+    ]
     
     let animation_duration = 0.3
     
@@ -84,8 +89,10 @@ class BottomSheetViewController: UIViewController {
         
         UIView.animate(withDuration: animation_duration) {
             let frame = self.view.frame
-            let y_component = UIScreen.main.bounds.height - 250
+            let y_component = frame.height - (frame.height * 0.3)
             self.view.frame = CGRect(x: 0, y: y_component, width: frame.width, height: frame.height)
+            
+            print("UIScreen.main.bounds.height = \(frame.height - frame.height/3) | frame.height = \(self.view.frame.height)")
         }
     }
     
@@ -129,16 +136,19 @@ class BottomSheetViewController: UIViewController {
         let frame = self.view.frame
         let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
         let bottom_sheet_height = frame.height
-        let maps_view_height = UIScreen.main.bounds.height
         let move_down_extra: CGFloat = 50
         
         // Ex: iPhone X
         //  - Top    = 94.0
         //  - Mid    = 562.0
         //  - Bottom = 712.0 (Variable declaration found in beginning of function)
-        let top = maps_view_height - bottom_sheet_height + nav_bar_height + move_down_extra
-        let mid = UIScreen.main.bounds.height - 250
-        let bot = UIScreen.main.bounds.height - 100
+        let top = nav_bar_height + move_down_extra
+        let mid = frame.height - (frame.height * 0.3)
+        
+        let calc = (bottom_sheet_height * 0.13)
+        let bot = bottom_sheet_height - calc
+        
+        print("\(bottom_sheet_height) - \(calc) = \(bot)")
         
         // Movement of Bottom Sheet
         let translation = recognizer.translation(in: self.view)
