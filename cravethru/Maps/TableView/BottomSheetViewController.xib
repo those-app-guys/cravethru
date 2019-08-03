@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="search_bar" destination="3kx-K5-heo" id="vyH-Ef-yyd"/>
                 <outlet property="table_view" destination="eah-ga-ItY" id="Clf-8a-nbv"/>
+                <outlet property="table_view_bottom" destination="APV-SL-oFA" id="xUg-Yp-Q1J"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,7 +32,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eah-ga-ItY">
-                    <rect key="frame" x="0.0" y="54" width="375" height="626"/>
+                    <rect key="frame" x="0.0" y="54" width="375" height="724"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -46,9 +47,9 @@
             <constraints>
                 <constraint firstItem="eah-ga-ItY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="54" id="7C6-UO-sSF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eah-ga-ItY" secondAttribute="trailing" id="9ul-ua-Vmf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eah-ga-ItY" secondAttribute="bottom" id="APV-SL-oFA"/>
                 <constraint firstItem="eah-ga-ItY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E0p-f1-YzX"/>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="leading" secondItem="eah-ga-ItY" secondAttribute="leading" id="Jf1-Fy-sv2"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eah-ga-ItY" secondAttribute="bottom" constant="98" id="MFz-ac-DWw"/>
                 <constraint firstItem="eah-ga-ItY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Ziv-WC-M3u"/>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="frQ-vq-49x"/>
                 <constraint firstItem="3kx-K5-heo" firstAttribute="trailing" secondItem="eah-ga-ItY" secondAttribute="trailing" id="nF2-ea-f5I"/>
