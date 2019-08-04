@@ -14,6 +14,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("Start of Crave Thru!")
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+//        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     private func setupNavigationBarItems() {
