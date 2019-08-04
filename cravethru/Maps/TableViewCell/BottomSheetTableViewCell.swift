@@ -12,6 +12,8 @@ class BottomSheetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var name_label: UILabel!
     @IBOutlet weak var image_view: UIImageView!
+    @IBOutlet weak var review_label: UILabel!
+    @IBOutlet weak var type_label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

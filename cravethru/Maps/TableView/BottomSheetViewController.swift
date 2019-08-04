@@ -99,6 +99,19 @@ class BottomSheetViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         prepare_background_view()
+    
+        YelpAPI.yelp_business_search { (result) in
+            switch result {
+            case .success(let restaurants):
+                restaurants.forEach({ (restaurant) in
+                    print(restaurant.name)
+                })
+                break
+            case .failure(let error):
+                print("Failed to fetch courses: ", error)
+                break
+            }
+        }
     }
     
     func setup_table_view() {

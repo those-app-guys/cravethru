@@ -27,6 +27,7 @@
 		286B476622DFFDE7007E3C51 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */; };
 		286B476722DFFDE7007E3C51 /* BottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */; };
 		28C1F96222E0FE290077B2CA /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D7B60EE22DCE3160098DBB0 /* Login.storyboard */; };
+		28E98CF622F791E30024466F /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E98CF522F791E30024466F /* YelpAPI.swift */; };
 		4213BB8EBC6C81476531A06D /* Pods_cravethruUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF759626E243BCEEB45C4D2 /* Pods_cravethruUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		286B476222DFFD9F007E3C51 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetViewController.xib; sourceTree = "<group>"; };
+		28E98CF522F791E30024466F /* YelpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPI.swift; sourceTree = "<group>"; };
 		4067829F8A601F9C2DEA1BFF /* Pods-cravethruUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cravethruUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cravethruUITests/Pods-cravethruUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		529FA672A6F2C6682E06DCAD /* Pods-cravethruTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cravethruTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cravethruTests/Pods-cravethruTests.release.xcconfig"; sourceTree = "<group>"; };
 		7415D7AE9CE336CBC7393ED4 /* Pods-cravethru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cravethru.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cravethru/Pods-cravethru.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		286B472522D293D9007E3C51 /* cravethru */ = {
 			isa = PBXGroup;
 			children = (
+				28E98CF422F791BA0024466F /* APICaller */,
 				1DA8026522F0D7DE001815BB /* GoogleService-Info.plist */,
 				286B472622D293D9007E3C51 /* AppDelegate.swift */,
 				286B472822D293D9007E3C51 /* HomeViewController.swift */,
@@ -198,6 +201,13 @@
 			);
 			path = cravethruUITests;
 			sourceTree = "<group>";
+		};
+		28E98CF422F791BA0024466F /* APICaller */ = {
+			isa = PBXGroup;
+			children = (
+				28E98CF522F791E30024466F /* YelpAPI.swift */,
+			);
+			path = APICaller;
 		};
 		35F400BDA691C4C783921BF7 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -472,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E98CF622F791E30024466F /* YelpAPI.swift in Sources */,
 				1DA270EE22F0BEA7008B32A2 /* LoginViewController.swift in Sources */,
 				1DA270F022F0BED5008B32A2 /* SignUpViewController.swift in Sources */,
 				286B476322DFFD9F007E3C51 /* MapsViewController.swift in Sources */,

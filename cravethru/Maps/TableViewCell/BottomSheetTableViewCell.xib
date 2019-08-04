@@ -56,6 +56,8 @@
             <connections>
                 <outlet property="image_view" destination="vnF-EC-ItG" id="KBn-a1-LLx"/>
                 <outlet property="name_label" destination="vif-4T-u1w" id="xyK-zv-3Hc"/>
+                <outlet property="review_label" destination="Qhm-3q-9yj" id="DbB-2A-QNi"/>
+                <outlet property="type_label" destination="kbd-1X-d49" id="XBx-ig-ULG"/>
             </connections>
             <point key="canvasLocation" x="34.782608695652179" y="34.821428571428569"/>
         </tableViewCell>
