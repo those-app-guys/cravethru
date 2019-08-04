@@ -21,6 +21,7 @@
 		286B476622DFFDE7007E3C51 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */; };
 		286B476722DFFDE7007E3C51 /* BottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */; };
 		28C1F96222E0FE290077B2CA /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D7B60EE22DCE3160098DBB0 /* Login.storyboard */; };
+		28E98CF622F791E30024466F /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E98CF522F791E30024466F /* YelpAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		286B476222DFFD9F007E3C51 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetViewController.xib; sourceTree = "<group>"; };
+		28E98CF522F791E30024466F /* YelpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		286B472522D293D9007E3C51 /* cravethru */ = {
 			isa = PBXGroup;
 			children = (
+				28E98CF422F791BA0024466F /* APICaller */,
 				286B472622D293D9007E3C51 /* AppDelegate.swift */,
 				286B472822D293D9007E3C51 /* HomeViewController.swift */,
 				1D7B60EE22DCE3160098DBB0 /* Login.storyboard */,
@@ -168,6 +171,14 @@
 				286B474822D293DA007E3C51 /* Info.plist */,
 			);
 			path = cravethruUITests;
+			sourceTree = "<group>";
+		};
+		28E98CF422F791BA0024466F /* APICaller */ = {
+			isa = PBXGroup;
+			children = (
+				28E98CF522F791E30024466F /* YelpAPI.swift */,
+			);
+			path = APICaller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E98CF622F791E30024466F /* YelpAPI.swift in Sources */,
 				286B476322DFFD9F007E3C51 /* MapsViewController.swift in Sources */,
 				286B472922D293D9007E3C51 /* HomeViewController.swift in Sources */,
 				286B472722D293D9007E3C51 /* AppDelegate.swift in Sources */,
