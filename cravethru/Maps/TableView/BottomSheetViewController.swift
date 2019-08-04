@@ -12,12 +12,22 @@ class BottomSheetViewController: UIViewController {
     
     @IBOutlet weak var search_bar: UISearchBar!
     @IBOutlet weak var table_view: UITableView!
+    @IBOutlet weak var table_view_bottom: NSLayoutConstraint!
     
-    var users = ["Sujang", "Ray", "Joe", "RJ", "Jose", "Raju", "Dalanna", "Erick", "Francel"]
     
-    var initial_section: CGFloat = 0
+    var users = ["First Cell", "Ray", "Joe", "RJ",
+                 "Jose", "Raju", "Dalanna", "Erick", "Francel",
+                 "Jose", "Raju", "Dalanna", "Erick", "Francel",
+                 "Jose", "Raju", "Dalanna", "Erick", "Last Cell"
+    ]
     
     let animation_duration = 0.3
+    
+    // we set a variable to hold the contentOffSet before scroll view scrolls
+    var lastContentOffset: CGFloat = 0
+    var is_at_top = false
+    
+    var recognizer = UIPanGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +43,8 @@ class BottomSheetViewController: UIViewController {
         view.layer.masksToBounds = true;    // Ensures rounded corners
         
         // Gesture for moving Bottom Sheet Up & Down
-        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
-        view.addGestureRecognizer(gesture)
+        recognizer = UIPanGestureRecognizer.init(target: self, action: #selector(BottomSheetViewController.pan_gesture(recognizer:)))
+        view.addGestureRecognizer(recognizer)
         
         // Blur Effect
         // 1
@@ -80,8 +90,9 @@ class BottomSheetViewController: UIViewController {
         
         UIView.animate(withDuration: animation_duration) {
             let frame = self.view.frame
-            let y_component = UIScreen.main.bounds.height - 250
-            self.view.frame = CGRect(x: 0, y: y_component, width: frame.width, height: frame.height)
+            let mid = frame.height - (frame.height * 0.35)
+            self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
+            self.table_view_bottom.constant = mid
         }
     }
     
@@ -94,6 +105,7 @@ class BottomSheetViewController: UIViewController {
         table_view.rowHeight = UITableView.automaticDimension
         table_view.estimatedRowHeight = 44
         table_view.register(UINib(nibName: "BottomSheetTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        table_view.tableFooterView = UIView(frame: .zero) // Hides empty cells
     }
     
     func prepare_background_view() {
@@ -113,28 +125,28 @@ class BottomSheetViewController: UIViewController {
         view.endEditing(true)
     }
     
+    func animate_to_section(section: CGFloat) {
+        UIView.animate(withDuration: animation_duration) {
+            self.view.frame = CGRect(x: 0, y: section, width: self.view.frame.width, height: self.view.frame.height)
+        }
+    }
+    
     // Controls movement of bottom sheet
     @objc func pan_gesture(recognizer: UIPanGestureRecognizer) {
         // Calculations for 'Top' Section
         let frame = self.view.frame
         let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
         let bottom_sheet_height = frame.height
-        let maps_view_height = UIScreen.main.bounds.height
-        let move_down_extra: CGFloat = 50
         
-        // Ex: iPhone X
-        //  - Top    = 94.0
-        //  - Mid    = 562.0
-        //  - Bottom = 712.0 (Variable declaration found in beginning of function)
-        let top = maps_view_height - bottom_sheet_height + nav_bar_height + move_down_extra
-        let mid = UIScreen.main.bounds.height - 250
-        let bot = UIScreen.main.bounds.height - 100
+        let top = nav_bar_height + ((self.view.frame.height - nav_bar_height) * 0.15)
+        let mid = frame.height - (frame.height * 0.35)
+        let bot = bottom_sheet_height - (bottom_sheet_height * 0.13)
         
         // Movement of Bottom Sheet
         let translation = recognizer.translation(in: self.view)
         let y = self.view.frame.minY + translation.y
-
-        // Ensures bottom sheet does not go below the 'Bottom' & 'Top' section (Off screen below & Blocks the Maps View on top)
+        
+        // Ensures bottom sheet does not go below the 'Bottom' & above 'Top' section (Off screen below & Blocks the Maps View on top)
         if y <= bot && y >= top - (top/3) {
             self.view.frame = CGRect(x: 0, y: y, width: view.frame.width, height: view.frame.height)
         }
@@ -146,16 +158,14 @@ class BottomSheetViewController: UIViewController {
         let between_top_mid = y > top && y < mid
         let between_mid_bot = y > mid && y < bot
         
-        // Keep track of what section we started
-        //  - Helps understand what direction we're moving to (CMD + F for "initial_section" to its uses)
-        if recognizer.state == .began {
-            self.initial_section = y
-        }
+        // See what direction user is moving the Bottom Sheet
+        let velocity = recognizer.velocity(in: self.view)
         
-        let mid_to_bottom = initial_section < y && between_mid_bot
-        let bottom_to_mid = initial_section > y && between_mid_bot
-        let mid_to_top = initial_section > y && between_top_mid
-        let top_to_mid = initial_section < y && between_top_mid
+        let is_going_up = velocity.y < 0 ? true : false
+        let mid_to_bottom = !is_going_up && between_mid_bot
+        let bottom_to_mid = is_going_up && between_mid_bot
+        let mid_to_top = is_going_up && between_top_mid
+        let top_to_mid = !is_going_up && between_top_mid
         
         // Ensures when Bottom Sheet moves from "bottom" section
         // to display table view
@@ -165,27 +175,38 @@ class BottomSheetViewController: UIViewController {
             self.table_view.isHidden = true
         }
         
+        // Animates dim effect in Maps View
+        if mid_to_top || above_top {
+            //  - Scrolling view shows all cells
+            self.table_view_bottom.constant = top
+            NotificationCenter.default.post(name: Notification.Name("dim_on"), object: nil, userInfo: nil)
+            
+        } else {
+            NotificationCenter.default.post(name: Notification.Name("dim_off"), object: nil, userInfo: nil)
+        }
+        
         // Locate which section is belongs to
         // Checks if user let go of pan gesture
         let let_go_gesture = recognizer.state == .ended
         if  let_go_gesture {
+            is_at_top = false
+            
             // Animating Bottom Sheet movement after letting go
             if mid_to_top || above_top {
-                UIView.animate(withDuration: animation_duration) {
-                    self.view.frame = CGRect(x: 0, y: top, width: frame.width, height: frame.height)
-                }
-            } else if top_to_mid {
-                UIView.animate(withDuration: animation_duration) {
-                    self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
+                is_at_top = true
+                animate_to_section(section: top)
+            } else if top_to_mid || bottom_to_mid {
+                UIView.animate(withDuration: animation_duration, animations: {
+                    self.view.frame = CGRect(x: 0, y: mid, width: self.view.frame.width, height: self.view.frame.height)
+                }) { (is_finished) in
+                    if is_finished {
+                        self.table_view_bottom.constant = mid
+                    }
                 }
             } else if mid_to_bottom {
                 UIView.animate(withDuration: animation_duration) {
                     self.view.frame = CGRect(x: 0, y: bot, width: frame.width, height: frame.height)
                     self.table_view.isHidden = true
-                }
-            } else if bottom_to_mid {
-                UIView.animate(withDuration: animation_duration) {
-                    self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
                 }
             } else {
                 self.table_view.isHidden = true
@@ -225,15 +246,12 @@ extension BottomSheetViewController : UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         // Animates moving Bottom Sheet to front
         UIView.animate(withDuration: animation_duration) {
-            let frame = self.view.frame
             let nav_bar_height = UIApplication.shared.statusBarFrame.size.height
-            let bottom_sheet_height = frame.height
-            let maps_view_height = UIScreen.main.bounds.height
-            let move_down_extra: CGFloat = 50
-            
-            let y = maps_view_height - bottom_sheet_height + nav_bar_height + move_down_extra
-            self.view.frame = CGRect(x: 0, y: y, width: frame.width, height: frame.height)
+            let top = nav_bar_height + ((self.view.frame.height - nav_bar_height) * 0.15)
+            self.view.frame = CGRect(x: 0, y: top, width: self.view.frame.width, height: self.view.frame.height)
+            self.table_view_bottom.constant = top // Allows the scroll view to scroll through all cells
         }
+        NotificationCenter.default.post(name: Notification.Name("dim_on"), object: nil, userInfo: nil)
         self.table_view.isHidden = false
         
         return true    // True = Display Keyboard, False = Don't display
@@ -254,7 +272,8 @@ extension BottomSheetViewController : UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+    // In Top Section: Dragging the scroll view will hide the keyboard
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
 }
