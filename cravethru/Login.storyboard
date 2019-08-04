@@ -108,10 +108,10 @@
             </objects>
             <point key="canvasLocation" x="1910.144927536232" y="55.580357142857139"/>
         </scene>
-        <!--HomeViewController-->
+        <!--HomeNavigationController-->
         <scene sceneID="UEh-cS-igc">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="HomeViewController" storyboardName="Home" referencedIdentifier="HomeViewController" id="6KS-TP-FK7" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="HomeViewController" storyboardName="Home" referencedIdentifier="HomeNavigationController" id="6KS-TP-FK7" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJq-2g-pg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2613.768115942029" y="40.848214285714285"/>
