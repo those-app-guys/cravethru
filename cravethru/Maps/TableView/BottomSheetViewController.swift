@@ -91,16 +91,9 @@ class BottomSheetViewController: UIViewController {
         UIView.animate(withDuration: animation_duration) {
             let frame = self.view.frame
             let mid = frame.height - (frame.height * 0.35)
-//            let mid: CGFloat = 0
             self.view.frame = CGRect(x: 0, y: mid, width: frame.width, height: frame.height)
-            
-//            print("UIScreen.main.bounds.height = \(frame.height - frame.height/3) | frame.height = \(self.view.frame.height)")
+            self.table_view_bottom.constant = mid
         }
-        let frame = self.view.frame
-        let mid = frame.height - (frame.height * 0.35)
-//        Mid: 582.4000000000001 | View Height: 896.0 | Phone Height: 896.0
-        print("Mid: \(mid) | View Height: \(frame.height) | Phone Height: \(UIScreen.main.bounds.height)")
-        table_view_bottom.constant = mid
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,7 +128,6 @@ class BottomSheetViewController: UIViewController {
     func animate_to_section(section: CGFloat) {
         UIView.animate(withDuration: animation_duration) {
             self.view.frame = CGRect(x: 0, y: section, width: self.view.frame.width, height: self.view.frame.height)
-//            self.table_view_bottom.constant = section
         }
     }
     
@@ -185,7 +177,10 @@ class BottomSheetViewController: UIViewController {
         
         // Animates dim effect in Maps View
         if mid_to_top || above_top {
+            //  - Scrolling view shows all cells
+            self.table_view_bottom.constant = top
             NotificationCenter.default.post(name: Notification.Name("dim_on"), object: nil, userInfo: nil)
+            
         } else {
             NotificationCenter.default.post(name: Notification.Name("dim_off"), object: nil, userInfo: nil)
         }
@@ -201,7 +196,13 @@ class BottomSheetViewController: UIViewController {
                 is_at_top = true
                 animate_to_section(section: top)
             } else if top_to_mid || bottom_to_mid {
-                animate_to_section(section: mid)
+                UIView.animate(withDuration: animation_duration, animations: {
+                    self.view.frame = CGRect(x: 0, y: mid, width: self.view.frame.width, height: self.view.frame.height)
+                }) { (is_finished) in
+                    if is_finished {
+                        self.table_view_bottom.constant = mid
+                    }
+                }
             } else if mid_to_bottom {
                 UIView.animate(withDuration: animation_duration) {
                     self.view.frame = CGRect(x: 0, y: bot, width: frame.width, height: frame.height)
