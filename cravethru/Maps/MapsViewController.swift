@@ -32,6 +32,7 @@ class MapsViewController: UIViewController {
         let user_lat = location_manager.location?.coordinate.latitude
         let user_lon = location_manager.location?.coordinate.longitude
         print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
+        
         YelpAPI.yelp_business_search(latitude: user_lat!, longitude: user_lon!) { (result) in
             switch result {
             case .success(let restaurants):
