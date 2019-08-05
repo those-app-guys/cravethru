@@ -28,6 +28,33 @@ class MapsViewController: UIViewController {
         location_manager.desiredAccuracy = kCLLocationAccuracyBest
         location_manager.requestWhenInUseAuthorization()
         location_manager.requestLocation()
+        
+        let user_lat = location_manager.location?.coordinate.latitude
+        let user_lon = location_manager.location?.coordinate.longitude
+        print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
+        YelpAPI.yelp_business_search(latitude: user_lat!, longitude: user_lon!) { (result) in
+            switch result {
+            case .success(let restaurants):
+                restaurants.businesses.forEach({ (restaurant) in
+                    print(restaurant.name)
+                })
+                break
+            case .failure(let error):
+                print("\n\nFailed to fetch courses: ", error, "\n\n")
+                break
+            }
+        }
+
+//        YelpAPI.yelp_business_search(latitude: user_lat!, longitude: user_lon!) { (result) in
+//            switch result {
+//            case .success(let message):
+//                print(message)
+//                break
+//            case .failure(let error):
+//                print("Failed to fetch courses: ", error)
+//                break
+//            }
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
