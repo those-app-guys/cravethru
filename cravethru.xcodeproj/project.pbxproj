@@ -12,6 +12,7 @@
 		1DA270EE22F0BEA7008B32A2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA270ED22F0BEA7008B32A2 /* LoginViewController.swift */; };
 		1DA270F022F0BED5008B32A2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA270EF22F0BED5008B32A2 /* SignUpViewController.swift */; };
 		1DA8026322F0D7DE001815BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DA8026522F0D7DE001815BB /* GoogleService-Info.plist */; };
+		1DA8026722FA16A9001815BB /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA8026622FA16A9001815BB /* TinderCard.swift */; };
 		208E8EB496D79A243DD44F58 /* Pods_cravethruTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85554DC2CE24DF908B96EB40 /* Pods_cravethruTests.framework */; };
 		280775C222ED2AF200167F51 /* BottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280775C022ED2AF200167F51 /* BottomSheetTableViewCell.swift */; };
 		280775C322ED2AF200167F51 /* BottomSheetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280775C122ED2AF200167F51 /* BottomSheetTableViewCell.xib */; };
@@ -55,6 +56,7 @@
 		1DA270ED22F0BEA7008B32A2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1DA270EF22F0BED5008B32A2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1DA8026422F0D7DE001815BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1DA8026622FA16A9001815BB /* TinderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
 		280775C022ED2AF200167F51 /* BottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetTableViewCell.swift; sourceTree = "<group>"; };
 		280775C122ED2AF200167F51 /* BottomSheetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTableViewCell.xib; sourceTree = "<group>"; };
 		286B472322D293D9007E3C51 /* cravethru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cravethru.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 				1DA270ED22F0BEA7008B32A2 /* LoginViewController.swift */,
 				1DA270EB22EF8651008B32A2 /* SignUp.storyboard */,
 				286B472A22D293D9007E3C51 /* Home.storyboard */,
+				1DA8026622FA16A9001815BB /* TinderCard.swift */,
 				280775BE22ED2A7600167F51 /* Maps */,
 				286B472D22D293DA007E3C51 /* Assets.xcassets */,
 				286B472F22D293DA007E3C51 /* LaunchScreen.storyboard */,
@@ -491,6 +494,7 @@
 				286B472722D293D9007E3C51 /* AppDelegate.swift in Sources */,
 				280775C222ED2AF200167F51 /* BottomSheetTableViewCell.swift in Sources */,
 				286B476622DFFDE7007E3C51 /* BottomSheetViewController.swift in Sources */,
+				1DA8026722FA16A9001815BB /* TinderCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
