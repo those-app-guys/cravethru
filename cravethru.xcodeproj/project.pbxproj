@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		138683A68560DCEC754788A0 /* Pods_cravethru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63A77B34BC579436491B7E2 /* Pods_cravethru.framework */; };
+		1D95D5DA22FA43EF00494312 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D95D5D922FA43EF00494312 /* HomeViewController.swift */; };
 		1DA270EC22EF8651008B32A2 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DA270EB22EF8651008B32A2 /* SignUp.storyboard */; };
 		1DA270EE22F0BEA7008B32A2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA270ED22F0BEA7008B32A2 /* LoginViewController.swift */; };
 		1DA270F022F0BED5008B32A2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA270EF22F0BED5008B32A2 /* SignUpViewController.swift */; };
@@ -17,7 +18,6 @@
 		280775C222ED2AF200167F51 /* BottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280775C022ED2AF200167F51 /* BottomSheetTableViewCell.swift */; };
 		280775C322ED2AF200167F51 /* BottomSheetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280775C122ED2AF200167F51 /* BottomSheetTableViewCell.xib */; };
 		286B472722D293D9007E3C51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B472622D293D9007E3C51 /* AppDelegate.swift */; };
-		286B472922D293D9007E3C51 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B472822D293D9007E3C51 /* HomeViewController.swift */; };
 		286B472C22D293D9007E3C51 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 286B472A22D293D9007E3C51 /* Home.storyboard */; };
 		286B472E22D293DA007E3C51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286B472D22D293DA007E3C51 /* Assets.xcassets */; };
 		286B473122D293DA007E3C51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 286B472F22D293DA007E3C51 /* LaunchScreen.storyboard */; };
@@ -52,6 +52,7 @@
 /* Begin PBXFileReference section */
 		060E8714B949883088F79063 /* Pods-cravethru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cravethru.release.xcconfig"; path = "Pods/Target Support Files/Pods-cravethru/Pods-cravethru.release.xcconfig"; sourceTree = "<group>"; };
 		1D7B60EE22DCE3160098DBB0 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		1D95D5D922FA43EF00494312 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1DA270EB22EF8651008B32A2 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		1DA270ED22F0BEA7008B32A2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1DA270EF22F0BED5008B32A2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		280775C122ED2AF200167F51 /* BottomSheetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetTableViewCell.xib; sourceTree = "<group>"; };
 		286B472322D293D9007E3C51 /* cravethru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cravethru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		286B472622D293D9007E3C51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		286B472822D293D9007E3C51 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		286B472B22D293D9007E3C51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		286B472D22D293DA007E3C51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		286B473022D293DA007E3C51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -172,8 +172,8 @@
 				28E98CF722F79AED0024466F /* APICaller */,
 				1DA8026522F0D7DE001815BB /* GoogleService-Info.plist */,
 				286B472622D293D9007E3C51 /* AppDelegate.swift */,
-				286B472822D293D9007E3C51 /* HomeViewController.swift */,
 				1D7B60EE22DCE3160098DBB0 /* Login.storyboard */,
+				1D95D5D922FA43EF00494312 /* HomeViewController.swift */,
 				1DA270EF22F0BED5008B32A2 /* SignUpViewController.swift */,
 				1DA270ED22F0BEA7008B32A2 /* LoginViewController.swift */,
 				1DA270EB22EF8651008B32A2 /* SignUp.storyboard */,
@@ -489,9 +489,9 @@
 				1DA270EE22F0BEA7008B32A2 /* LoginViewController.swift in Sources */,
 				1DA270F022F0BED5008B32A2 /* SignUpViewController.swift in Sources */,
 				286B476322DFFD9F007E3C51 /* MapsViewController.swift in Sources */,
-				286B472922D293D9007E3C51 /* HomeViewController.swift in Sources */,
 				28E98CF922F79AED0024466F /* YelpAPI.swift in Sources */,
 				286B472722D293D9007E3C51 /* AppDelegate.swift in Sources */,
+				1D95D5DA22FA43EF00494312 /* HomeViewController.swift in Sources */,
 				280775C222ED2AF200167F51 /* BottomSheetTableViewCell.swift in Sources */,
 				286B476622DFFDE7007E3C51 /* BottomSheetViewController.swift in Sources */,
 				1DA8026722FA16A9001815BB /* TinderCard.swift in Sources */,
