@@ -24,18 +24,31 @@ struct VenueRecommendations : Decodable {
     
     struct RestaurantInfo : Decodable {
         struct Location : Decodable {
+            // (Used for Pins on Maps)
             let lat : Double
             let lng : Double
+            
+            let distance : Int
+            let postalCode : String
+            let city : String
+            let state : String
+            let country : String
+            let formattedAddress : [String] // An array = [Street, {City, State, Zipcode}, Country]
         }
         
         struct Category : Decodable {
-            let name : String
+            struct IconImage : Decodable {
+                let prefix : String
+                let suffix : String
+            }
+            
+            let shortName : String
+            let icon : IconImage
         }
         
         let name : String           // Restaurant Name
         let location : Location     // Location
-        let categories : Category   // Category (Ex: Sandwich Place, Fast Food Restaurant)
-        
+        let categories : Category   // Category (Ex: Sandwich, Fast Food)
     }
     
     let response : Response

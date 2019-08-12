@@ -11,7 +11,13 @@ import MapKit
 import Foundation
 
 class FoursquarePlacesAPI {
-    let headers = [
+    private static let client_id = "UH3KGN3HLTNDN1DIA1EIY0FKN120TC5W2L1H22EFPXMZFHJF"
+    private static let client_secret = "OQ0F5RZWB53GZSWIKC4YWBTTJ4IDXQPPICLZQEUD3GQITVAA"
+    private static var current_date = ""
+    private static var category = "food"
+    private static var limit = 50
+    
+    private static let headers = [
         "User-Agent": "PostmanRuntime/7.15.2",
         "Accept": "*/*",
         "Cache-Control": "no-cache",
@@ -22,32 +28,69 @@ class FoursquarePlacesAPI {
         "cache-control": "no-cache"
     ]
     
-//    class func foursquare_business_search(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (Result<VenueRecommendations, Error>) -> ()) {
-//        print("\nLatitude: \(String(describing: latitude)) | Longitude: \(String(describing: longitude))\n")
-//
-//        let url_string = "https://api.yelp.com/v3/businesses/search?latitude=\(latitude)&longitude=\(longitude)&categories=restaurants&limit=2"
-//        guard let url = URL(string: url_string) else { return }
-//
-//        let request = NSMutableURLRequest(url: url,
-//                                          cachePolicy: .useProtocolCachePolicy,
-//                                          timeoutInterval: 10.0)
-//        request.httpMethod = "GET"
-//        request.allHTTPHeaderFields = self.headers
-//
-//        URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//
-//            // Successful
-//            do {
-//                let restaurants = try JSONDecoder().decode(Restaurant.self, from: data!)
-//
-//                completion(.success(restaurants))
-//            } catch let json_error {
-//                completion(.failure(json_error))
-//            }
-//            }.resume()
-//    }
+    let request = NSMutableURLRequest(url: NSURL(string: "&limit=50&offset=5&openNow=1&sortByDistance=1")! as URL,
+                                      cachePolicy: .useProtocolCachePolicy,
+                                      timeoutInterval: 10.0)
+    
+    class func foursquare_business_search(latitude: CLLocationDegrees, longitude: CLLocationDegrees, open_now: Bool, completion: @escaping (Result<VenueRecommendations, Error>) -> ()) {
+        let authorization = "?client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
+        let parameters = "&ll=\(latitude),\(longitude)&section=\(category)&limit=\(limit)&openNow=\(NSNumber(value: open_now))"
+        let url_string = "https://api.foursquare.com/v2/venues/explore" + authorization + parameters
+        guard let url = URL(string: url_string) else { return }
+
+        let request = NSMutableURLRequest(url: url,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = self.headers
+
+        URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            // Successful
+            do {
+                let restaurants = try JSONDecoder().decode(Restaurant.self, from: data!)
+
+                completion(.success(restaurants))
+            } catch let json_error {
+                completion(.failure(json_error))
+            }
+            }.resume()
+    }
+    
+    class func getDate() {
+        // 1. Setup Date & Calendar
+        let date = Date()
+        let calendar = Calendar.current
+        
+        // 2. Get Date for Places API Request URLs
+        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date)
+        let year = components.year
+        var formatted_month = ""
+        var formatted_day = ""
+        
+        // 3. Format month
+        if let unwrapped_month = components.month {
+            if unwrapped_month >= 1 && unwrapped_month <= 9 {
+                formatted_month = "0\(unwrapped_month)"
+            } else {
+                formatted_month = "\(unwrapped_month)"
+            }
+        }
+        
+        // 4. Format day
+        if let unwrapped_day = components.day {
+            if unwrapped_day >= 1 && unwrapped_day <= 9 {
+                formatted_day = "0\(unwrapped_day)"
+            } else {
+                formatted_day = "\(unwrapped_day)"
+            }
+        }
+        
+        // 4. Setup Current Date
+        current_date = "\(year!)\(formatted_month)\(formatted_day)"
+    }
 }
