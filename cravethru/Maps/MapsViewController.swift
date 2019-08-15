@@ -60,9 +60,7 @@ class MapsViewController: UIViewController {
             switch result {
             case .success(let restaurants):
                 print("Success!")
-//                restaurants.response.groups[0].items.forEach({ (restaurant) in
-//                    print(restaurant.venue.name)
-//                })
+                self.populateAnnotations(restaurants: restaurants)
                 break
                 
             case .failure(let error):
@@ -125,12 +123,27 @@ class MapsViewController: UIViewController {
         dim_view.frame = CGRect(x: 0, y: top, width: width, height: height)
     }
     
-    func animate_dim(dim_level: CGFloat) {
+    func animate_dim(dim_level : CGFloat) {
         UIView.animate(withDuration: 0.3) {
             self.dim_view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             self.dim_view.alpha = dim_level
         }
     }
+    
+    func populateAnnotations(restaurants : VenueRecommendations) {
+        restaurants.response.groups.first?.items.forEach({ (restaurant) in
+            let annotation = MKPointAnnotation()
+            
+            //  - Store ea. restaurant's info
+            annotation.title = restaurant.venue.name
+            annotation.coordinate = CLLocationCoordinate2D(latitude: restaurant.venue.location.lat, longitude: restaurant.venue.location.lng)
+            
+            DispatchQueue.main.async {
+                self.map_view.addAnnotation(annotation)
+            }
+        })
+    }
+    
     
     @objc func notification_dim_on(_ notification: Notification) {
         animate_dim(dim_level: 0.4)
