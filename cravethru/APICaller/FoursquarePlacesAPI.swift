@@ -32,10 +32,16 @@ class FoursquarePlacesAPI {
                                       cachePolicy: .useProtocolCachePolicy,
                                       timeoutInterval: 10.0)
     
+    // https://api.foursquare.com/v2/venues/explore?client_id=UH3KGN3HLTNDN1DIA1EIY0FKN120TC5W2L1H22EFPXMZFHJF&client_secret=OQ0F5RZWB53GZSWIKC4YWBTTJ4IDXQPPICLZQEUD3GQITVAA&v=20190811&ll=36.687561,-121.791367&section=food&limit=50&offset=5&openNow=1&sortByDistance=1"
     class func foursquare_business_search(latitude: CLLocationDegrees, longitude: CLLocationDegrees, open_now: Bool, completion: @escaping (Result<VenueRecommendations, Error>) -> ()) {
+        getDate()
+        let request_url = "https://api.foursquare.com/v2/venues/explore"
         let authorization = "?client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
         let parameters = "&ll=\(latitude),\(longitude)&section=\(category)&limit=\(limit)&openNow=\(NSNumber(value: open_now))"
-        let url_string = "https://api.foursquare.com/v2/venues/explore" + authorization + parameters
+        
+        let url_string = request_url + authorization + parameters
+        print(url_string)
+
         guard let url = URL(string: url_string) else { return }
 
         let request = NSMutableURLRequest(url: url,
@@ -52,10 +58,11 @@ class FoursquarePlacesAPI {
 
             // Successful
             do {
-                let restaurants = try JSONDecoder().decode(Restaurant.self, from: data!)
-
+                let restaurants = try JSONDecoder().decode(VenueRecommendations.self, from: data!)
+                
                 completion(.success(restaurants))
             } catch let json_error {
+                print("\n\n", "Did not work!")
                 completion(.failure(json_error))
             }
             }.resume()

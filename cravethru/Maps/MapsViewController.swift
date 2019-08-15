@@ -33,18 +33,18 @@ class MapsViewController: UIViewController {
         let user_lon = location_manager.location?.coordinate.longitude
         print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
         
-        YelpAPI.yelp_business_search(latitude: user_lat!, longitude: user_lon!) { (result) in
-            switch result {
-            case .success(let restaurants):
-                restaurants.businesses.forEach({ (restaurant) in
-                    print(restaurant.name)
-                })
-                break
-            case .failure(let error):
-                print("\n\nFailed to fetch courses: ", error, "\n\n")
-                break
-            }
-        }
+//        YelpAPI.yelp_business_search(latitude: user_lat!, longitude: user_lon!) { (result) in
+//            switch result {
+//            case .success(let restaurants):
+//                restaurants.businesses.forEach({ (restaurant) in
+//                    print(restaurant.name)
+//                })
+//                break
+//            case .failure(let error):
+//                print("\n\nFailed to fetch courses: ", error, "\n\n")
+//                break
+//            }
+//        }
 
 //        YelpAPI.yelp_business_search(latitude: user_lat!, longitude: user_lon!) { (result) in
 //            switch result {
@@ -56,6 +56,20 @@ class MapsViewController: UIViewController {
 //                break
 //            }
 //        }
+        FoursquarePlacesAPI.foursquare_business_search(latitude: user_lat!, longitude: user_lon!, open_now: true) { (result) in
+            switch result {
+            case .success(let restaurants):
+                print("Success!")
+//                restaurants.response.groups[0].items.forEach({ (restaurant) in
+//                    print(restaurant.venue.name)
+//                })
+                break
+                
+            case .failure(let error):
+                print("\n\nError message: ", error, "\n\n")
+                break
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
