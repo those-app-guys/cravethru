@@ -63,9 +63,10 @@ class FoursquarePlacesAPI {
             do {
                 let restaurants = try JSONDecoder().decode(VenueRecommendations.self, from: data!)
                 
-                restaurants.response.groups.first?.items.forEach({ (restaurant) in
-                    print(restaurant.venue.name)
-                })
+                // Print Restaurant Names
+//                restaurants.response.groups.first?.items.forEach({ (restaurant) in
+//                    print(restaurant.venue.name)
+//                })
                 
                 completion(.success(restaurants))
             } catch let json_error {

@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
     @IBOutlet weak var verifyError: UILabel!
     
     static let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
+    static var restaurants = [VenueRecommendations.Restaurant]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +35,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     @IBAction func onLogin(_ sender: Any) {
@@ -71,7 +67,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
         switch status {
         case .authorizedWhenInUse:
             print("Login View -> Status = Authorized When In Use!")
-            
             let user_lat = LoginViewController.location_manager.location?.coordinate.latitude
             let user_lon = LoginViewController.location_manager.location?.coordinate.longitude
             print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
@@ -80,10 +75,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
                 switch result {
                 case .success(let restaurants):
                     print("Success!")
-//                    self.populateAnnotations(restaurants: restaurants)
+                    //                    self.populateAnnotations(restaurants: restaurants)
+                    
+                    LoginViewController.restaurants = restaurants.response.groups.first!.items
                     
                     // Segue to Home View after getting Foursquare Data
-                    self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                    }
                     break
                     
                 case .failure(let error):

@@ -10,11 +10,15 @@ import UIKit
 import MapKit
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("Start of Crave Thru!")
+
+        LoginViewController.restaurants.forEach({ (restaurant) in
+            print(restaurant.venue.name)
+        })
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
