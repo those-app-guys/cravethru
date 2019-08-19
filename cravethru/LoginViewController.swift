@@ -74,18 +74,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
             FoursquarePlacesAPI.foursquare_business_search(latitude: user_lat!, longitude: user_lon!, open_now: true) { (result) in
                 switch result {
                 case .success(let restaurants):
-                    print("Success!")
+                    print("Venue Recommendations Request = Success!")
                     //                    self.populateAnnotations(restaurants: restaurants)
                     
                     LoginViewController.restaurants = restaurants.response.groups.first!.items
                     
                     // Segue to Home View after getting Foursquare Data
+                    //  - Had to add Dispatch... due to background threading error perfomed (setAnimationsEnabled)
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "LoginSegue", sender: self)
                     }
                     break
                     
                 case .failure(let error):
+                    print("Venue Recommendations Request = Fail!")
                     print("\n\nError message: ", error, "\n\n")
                     break
                 }

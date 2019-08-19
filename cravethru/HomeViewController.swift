@@ -14,11 +14,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("Start of Crave Thru!")
+        print("***")
+        print("Home View")
+        print("***")
 
+        // Debugging to view all restaurants
+        print("\n----")
+        print("Foursquare Places API: Restaurant Results")
+        print("----")
         LoginViewController.restaurants.forEach({ (restaurant) in
-            print(restaurant.venue.name)
+            print("\t", restaurant.venue.name)
         })
+        print("----")
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

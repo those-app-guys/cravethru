@@ -43,7 +43,7 @@ class FoursquarePlacesAPI {
 //        let parameters = "&ll=\(latitude),\(longitude)&limit=\(limit)&query=\(query)"
         
         let url_string = request_url + authorization + parameters
-        print(url_string)
+//        print(url_string)
 
         guard let url = URL(string: url_string) else { return }
 

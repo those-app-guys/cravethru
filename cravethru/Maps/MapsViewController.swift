@@ -27,7 +27,7 @@ class MapsViewController: UIViewController {
 //        location_manager.delegate = self
 //        location_manager.desiredAccuracy = kCLLocationAccuracyBest
 //        location_manager.requestWhenInUseAuthorization()
-//        location_manager.requestLocation()
+        LoginViewController.location_manager.requestLocation()
         
 //        let user_lat = location_manager.location?.coordinate.latitude
 //        let user_lon = location_manager.location?.coordinate.longitude
