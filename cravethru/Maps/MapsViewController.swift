@@ -11,7 +11,7 @@ import MapKit
 
 class MapsViewController: UIViewController {
 
-    let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
+//    let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
     @IBOutlet weak var map_view: MKMapView!
     @IBOutlet var dim_view: UIView!
     
@@ -24,50 +24,30 @@ class MapsViewController: UIViewController {
         // .request...Auth()    -> Triggers location permission dialog. User will see it once.
         // .requestLocation()   -> Triggers one-time location request.
         
-        location_manager.delegate = self
-        location_manager.desiredAccuracy = kCLLocationAccuracyBest
-        location_manager.requestWhenInUseAuthorization()
-        location_manager.requestLocation()
+//        location_manager.delegate = self
+//        location_manager.desiredAccuracy = kCLLocationAccuracyBest
+//        location_manager.requestWhenInUseAuthorization()
+//        location_manager.requestLocation()
         
-        let user_lat = location_manager.location?.coordinate.latitude
-        let user_lon = location_manager.location?.coordinate.longitude
-        print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
+//        let user_lat = location_manager.location?.coordinate.latitude
+//        let user_lon = location_manager.location?.coordinate.longitude
         
-//        YelpAPI.yelp_business_search(latitude: user_lat!, longitude: user_lon!) { (result) in
+//        let user_lat = LoginViewController.location_manager.location?.coordinate.latitude
+//        let user_lon = LoginViewController.location_manager.location?.coordinate.longitude
+//        print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
+//        
+//        FoursquarePlacesAPI.foursquare_business_search(latitude: user_lat!, longitude: user_lon!, open_now: true) { (result) in
 //            switch result {
 //            case .success(let restaurants):
-//                restaurants.businesses.forEach({ (restaurant) in
-//                    print(restaurant.name)
-//                })
+//                print("Success!")
+//                self.populateAnnotations(restaurants: restaurants)
 //                break
+//                
 //            case .failure(let error):
-//                print("\n\nFailed to fetch courses: ", error, "\n\n")
+//                print("\n\nError message: ", error, "\n\n")
 //                break
 //            }
 //        }
-
-//        YelpAPI.yelp_business_search(latitude: user_lat!, longitude: user_lon!) { (result) in
-//            switch result {
-//            case .success(let message):
-//                print(message)
-//                break
-//            case .failure(let error):
-//                print("Failed to fetch courses: ", error)
-//                break
-//            }
-//        }
-        FoursquarePlacesAPI.foursquare_business_search(latitude: user_lat!, longitude: user_lon!, open_now: true) { (result) in
-            switch result {
-            case .success(let restaurants):
-                print("Success!")
-                self.populateAnnotations(restaurants: restaurants)
-                break
-                
-            case .failure(let error):
-                print("\n\nError message: ", error, "\n\n")
-                break
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -185,7 +165,7 @@ extension MapsViewController : CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             // Trigger another requestLocation() b/c
             // 1st attempt would have suffered a permission failure
-            location_manager.requestLocation()
+            LoginViewController.location_manager.requestLocation()
         }
     }
     

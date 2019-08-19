@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 
-class LoginViewController: UIViewController, UITextFieldDelegate{
+class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var verifyError: UILabel!
+    
+    static let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +46,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         let passwordText = passwordTextField.text!
         
         if emailText == "" && passwordText == ""{
-            self.performSegue(withIdentifier: "LoginSegue", sender: self)
+            LoginViewController.location_manager.delegate = self
+            LoginViewController.location_manager.desiredAccuracy = kCLLocationAccuracyBest
+            LoginViewController.location_manager.requestWhenInUseAuthorization()
         }
         
         Auth.auth().signIn(withEmail: emailText, password: passwordText) {(user, error) in
@@ -59,6 +64,56 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                     self.performSegue(withIdentifier: "LoginSegue", sender: self)
                 }
             }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse:
+            print("Login View -> Status = Authorized When In Use!")
+            
+            let user_lat = LoginViewController.location_manager.location?.coordinate.latitude
+            let user_lon = LoginViewController.location_manager.location?.coordinate.longitude
+            print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
+            
+            FoursquarePlacesAPI.foursquare_business_search(latitude: user_lat!, longitude: user_lon!, open_now: true) { (result) in
+                switch result {
+                case .success(let restaurants):
+                    print("Success!")
+//                    self.populateAnnotations(restaurants: restaurants)
+                    
+                    // Segue to Home View after getting Foursquare Data
+                    self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                    break
+                    
+                case .failure(let error):
+                    print("\n\nError message: ", error, "\n\n")
+                    break
+                }
+            }
+            
+            break
+            
+        case .denied:
+            print("Login View -> Status = Denied!")
+            /*
+             HANDLE WHEN USER DENIES REQUEST HERE
+            */
+            break
+        case .notDetermined:
+            print("Login View -> Status = Not Determined!")
+            break
+        
+        // May not handle these cases below
+        case .restricted:
+            print("Login View -> Status = Restricted!")
+            break
+        case .authorizedAlways:
+            print("Login View -> Status = Authorized Always")
+            break
+        @unknown default:
+            print("Login View -> Reached Default?")
+            break
         }
     }
     
