@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Firebase
 
-class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -62,6 +62,32 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
             }
         }
     }
+}
+
+extension UITextField{
+    func underlined(){
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = UIColor.darkGray.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+}
+
+extension LoginViewController : CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Only interested in the first location
+        if let user_location = locations.first {
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            
+            // Use's user's location go create region
+            MapsViewController.region = MKCoordinateRegion(center: user_location.coordinate, span: span)
+            
+            print("--Setting up User Location Span--")
+        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -69,6 +95,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
             print("Login View -> Status = Authorized When In Use!")
             let user_lat = LoginViewController.location_manager.location?.coordinate.latitude
             let user_lon = LoginViewController.location_manager.location?.coordinate.longitude
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            MapsViewController.region = MKCoordinateRegion(center: LoginViewController.location_manager.location!.coordinate, span: span)
             print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
             
             FoursquarePlacesAPI.foursquare_business_search(latitude: user_lat!, longitude: user_lon!, open_now: true) { (result) in
@@ -99,12 +127,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
             print("Login View -> Status = Denied!")
             /*
              HANDLE WHEN USER DENIES REQUEST HERE
-            */
+             */
             break
         case .notDetermined:
             print("Login View -> Status = Not Determined!")
             break
-        
+            
         // May not handle these cases below
         case .restricted:
             print("Login View -> Status = Restricted!")
@@ -116,18 +144,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CLLocationMana
             print("Login View -> Reached Default?")
             break
         }
-    }
-    
-}
-
-extension UITextField{
-    func underlined(){
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = UIColor.darkGray.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
-        border.borderWidth = width
-        self.layer.addSublayer(border)
-        self.layer.masksToBounds = true
     }
 }

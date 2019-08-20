@@ -16,38 +16,21 @@ class MapsViewController: UIViewController {
     @IBOutlet var dim_view: UIView!
     
     let temp: CGFloat = 0
+    static var region = MKCoordinateRegion()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // .delegate            -> Handles responses asynchronously. Needs an 'extension' to be: = self
-        // .request...Auth()    -> Triggers location permission dialog. User will see it once.
-        // .requestLocation()   -> Triggers one-time location request.
-        
-//        location_manager.delegate = self
-//        location_manager.desiredAccuracy = kCLLocationAccuracyBest
-//        location_manager.requestWhenInUseAuthorization()
-        LoginViewController.location_manager.requestLocation()
-        
-//        let user_lat = location_manager.location?.coordinate.latitude
-//        let user_lon = location_manager.location?.coordinate.longitude
-        
-//        let user_lat = LoginViewController.location_manager.location?.coordinate.latitude
-//        let user_lon = LoginViewController.location_manager.location?.coordinate.longitude
-//        print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
-//        
-//        FoursquarePlacesAPI.foursquare_business_search(latitude: user_lat!, longitude: user_lon!, open_now: true) { (result) in
-//            switch result {
-//            case .success(let restaurants):
-//                print("Success!")
-//                self.populateAnnotations(restaurants: restaurants)
-//                break
-//                
-//            case .failure(let error):
-//                print("\n\nError message: ", error, "\n\n")
-//                break
-//            }
-//        }
+        populateAnnotations(restaurants: LoginViewController.restaurants)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        map_view.setRegion(MapsViewController.region, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        map_view.removeAnnotations(map_view.annotations)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,8 +93,8 @@ class MapsViewController: UIViewController {
         }
     }
     
-    func populateAnnotations(restaurants : VenueRecommendations) {
-        restaurants.response.groups.first?.items.forEach({ (restaurant) in
+    func populateAnnotations(restaurants : [VenueRecommendations.Restaurant]) {
+        restaurants.forEach({ (restaurant) in
             let annotation = MKPointAnnotation()
             
             //  - Store ea. restaurant's info
