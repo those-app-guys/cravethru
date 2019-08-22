@@ -16,9 +16,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var verifyError: UILabel!
     
-    static let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
-    static var restaurants = [VenueRecommendations.Restaurant]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,9 +39,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let passwordText = passwordTextField.text!
         
         if emailText == "" && passwordText == ""{
-            LoginViewController.location_manager.delegate = self
-            LoginViewController.location_manager.desiredAccuracy = kCLLocationAccuracyBest
-            LoginViewController.location_manager.requestWhenInUseAuthorization()
+            self.performSegue(withIdentifier: "LoginSegue", sender: self)
         }
         
         Auth.auth().signIn(withEmail: emailText, password: passwordText) {(user, error) in
@@ -73,76 +68,5 @@ extension UITextField{
         border.borderWidth = width
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
-    }
-}
-
-extension LoginViewController : CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Only interested in the first location
-        if let user_location = locations.first {
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            
-            // Use's user's location go create region
-            MapsViewController.region = MKCoordinateRegion(center: user_location.coordinate, span: span)
-            
-            print("--Setting up User Location Span--")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse:
-            print("Login View -> Status = Authorized When In Use!")
-            let user_lat = LoginViewController.location_manager.location?.coordinate.latitude
-            let user_lon = LoginViewController.location_manager.location?.coordinate.longitude
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            MapsViewController.region = MKCoordinateRegion(center: LoginViewController.location_manager.location!.coordinate, span: span)
-            print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
-            
-            FoursquarePlacesAPI.foursquare_business_search(latitude: user_lat!, longitude: user_lon!, open_now: true) { (result) in
-                switch result {
-                case .success(let restaurants):
-                    print("Venue Recommendations Request = Success!")
-                    //                    self.populateAnnotations(restaurants: restaurants)
-                    
-                    LoginViewController.restaurants = restaurants.response.groups.first!.items
-                    
-                    // Segue to Home View after getting Foursquare Data
-                    //  - Had to add Dispatch... due to background threading error perfomed (setAnimationsEnabled)
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "LoginSegue", sender: self)
-                    }
-                    break
-                    
-                case .failure(let error):
-                    print("Venue Recommendations Request = Fail!")
-                    print("\n\nError message: ", error, "\n\n")
-                    break
-                }
-            }
-            
-            break
-            
-        case .denied:
-            print("Login View -> Status = Denied!")
-            /*
-             HANDLE WHEN USER DENIES REQUEST HERE
-             */
-            break
-        case .notDetermined:
-            print("Login View -> Status = Not Determined!")
-            break
-            
-        // May not handle these cases below
-        case .restricted:
-            print("Login View -> Status = Restricted!")
-            break
-        case .authorizedAlways:
-            print("Login View -> Status = Authorized Always")
-            break
-        @unknown default:
-            print("Login View -> Reached Default?")
-            break
-        }
     }
 }

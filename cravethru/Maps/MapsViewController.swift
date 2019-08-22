@@ -20,12 +20,12 @@ class MapsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        populateAnnotations(restaurants: LoginViewController.restaurants)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         map_view.setRegion(MapsViewController.region, animated: false)
+        populateAnnotations(restaurants: HomeViewController.restaurants)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -143,43 +143,43 @@ class MapsViewController: UIViewController {
 // Responses include:
 //      - Authorization & Location requests that were sent earlier in viewDidLoad
 //      - Handles incoming location data
-extension MapsViewController : CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            // Trigger another requestLocation() b/c
-            // 1st attempt would have suffered a permission failure
-            LoginViewController.location_manager.requestLocation()
-        }
-    }
-    
-    /*
- 
-     Region
-     ________________        __
-     |              |        |
-     |              |        |
-     |              |       Span
-     |              |        |
-     |______________|        __
-     
-     |--------------|
-            Span
-    */
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Only interested in the first location
-        if let user_location = locations.first {
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            
-            // Use's user's location go create region
-            let region = MKCoordinateRegion(center: user_location.coordinate, span: span)
-            
-            // Sets Screen to user's location
-            map_view.setRegion(region, animated: false)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("\n\tError: \(error)")
-    }
-}
+//extension MapsViewController : CLLocationManagerDelegate {
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        if status == .authorizedWhenInUse {
+//            // Trigger another requestLocation() b/c
+//            // 1st attempt would have suffered a permission failure
+//            HomeViewController.location_manager.requestLocation()
+//        }
+//    }
+//
+//    /*
+//
+//     Region
+//     ________________        __
+//     |              |        |
+//     |              |        |
+//     |              |       Span
+//     |              |        |
+//     |______________|        __
+//
+//     |--------------|
+//            Span
+//    */
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        // Only interested in the first location
+//        if let user_location = locations.first {
+//            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+//
+//            // Use's user's location go create region
+//            let region = MKCoordinateRegion(center: user_location.coordinate, span: span)
+//
+//            // Sets Screen to user's location
+//            map_view.setRegion(region, animated: false)
+//        }
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        print("\n\tError: \(error)")
+//    }
+//}
