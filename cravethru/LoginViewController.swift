@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 
-class LoginViewController: UIViewController, UITextFieldDelegate{
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -31,11 +32,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     @IBAction func onLogin(_ sender: Any) {
@@ -61,7 +57,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
             }
         }
     }
-    
 }
 
 extension UITextField{

@@ -14,6 +14,11 @@ class BottomSheetViewController: UIViewController {
     @IBOutlet weak var table_view: UITableView!
     @IBOutlet weak var table_view_bottom: NSLayoutConstraint!
     
+    // Category Lists
+    @IBOutlet weak var liked_image_view: UIImageView!
+    @IBOutlet weak var friends_image_view: UIImageView!
+    @IBOutlet weak var saved_image_view: UIImageView!
+    @IBOutlet weak var all_image_view: UIImageView!
     
     var users = ["First Cell", "Ray", "Joe", "RJ",
                  "Jose", "Raju", "Dalanna", "Erick", "Francel",
@@ -38,6 +43,24 @@ class BottomSheetViewController: UIViewController {
         
         setup_table_view()
         
+        // Setting up Image colors for categories
+        liked_image_view.layer.cornerRadius = liked_image_view.frame.height/2
+        liked_image_view.layer.borderWidth = 1
+        liked_image_view.layer.borderColor = UIColor.blue.cgColor
+        
+        friends_image_view.layer.cornerRadius = friends_image_view.frame.height/2
+        friends_image_view.layer.borderWidth = 1
+        friends_image_view.layer.borderColor = UIColor.red.cgColor
+        
+        saved_image_view.layer.cornerRadius = friends_image_view.frame.height/2
+        saved_image_view.layer.borderWidth = 1
+        saved_image_view.layer.borderColor = UIColor.orange.cgColor
+        
+        all_image_view.layer.cornerRadius = all_image_view.frame.height/2
+        all_image_view.layer.borderWidth = 1
+        all_image_view.layer.borderColor = UIColor.green.cgColor
+        
+        
         // Makes corners of bottom sheet a little more rounded
         view.layer.cornerRadius = 15;
         view.layer.masksToBounds = true;    // Ensures rounded corners
@@ -61,28 +84,6 @@ class BottomSheetViewController: UIViewController {
             blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
             blurView.widthAnchor.constraint(equalTo: view.widthAnchor),
             ])
-        
-        
-        //        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-        //        // 2
-        //        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
-        //        vibrancyView.translatesAutoresizingMaskIntoConstraints = false
-        //        // 3
-        //        vibrancyView.contentView.addSubview(bottom_sheet_view)
-        //        // 4
-        //        blurView.contentView.addSubview(vibrancyView)
-        //
-        //        NSLayoutConstraint.activate([
-        //            vibrancyView.heightAnchor.constraint(equalTo: blurView.contentView.heightAnchor),
-        //            vibrancyView.widthAnchor.constraint(equalTo: blurView.contentView.widthAnchor),
-        //            vibrancyView.centerXAnchor.constraint(equalTo: blurView.contentView.centerXAnchor),
-        //            vibrancyView.centerYAnchor.constraint(equalTo: blurView.contentView.centerYAnchor)
-        //            ])
-        //
-        //        NSLayoutConstraint.activate([
-        //            view.centerXAnchor.constraint(equalTo: vibrancyView.contentView.centerXAnchor),
-        //            view.centerYAnchor.constraint(equalTo: vibrancyView.contentView.centerYAnchor),
-        //            ])
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,19 +100,6 @@ class BottomSheetViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         prepare_background_view()
-    
-        YelpAPI.yelp_business_search { (result) in
-            switch result {
-            case .success(let restaurants):
-                restaurants.forEach({ (restaurant) in
-                    print(restaurant.name)
-                })
-                break
-            case .failure(let error):
-                print("Failed to fetch courses: ", error)
-                break
-            }
-        }
     }
     
     func setup_table_view() {

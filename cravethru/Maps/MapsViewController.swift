@@ -11,23 +11,26 @@ import MapKit
 
 class MapsViewController: UIViewController {
 
-    let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
+//    let location_manager = CLLocationManager() // Gives access to the location manager throughout the scope of the controller
     @IBOutlet weak var map_view: MKMapView!
     @IBOutlet var dim_view: UIView!
     
     let temp: CGFloat = 0
+    static var region = MKCoordinateRegion()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // .delegate            -> Handles responses asynchronously. Needs an 'extension' to be: = self
-        // .request...Auth()    -> Triggers location permission dialog. User will see it once.
-        // .requestLocation()   -> Triggers one-time location request.
-        
-        location_manager.delegate = self
-        location_manager.desiredAccuracy = kCLLocationAccuracyBest
-        location_manager.requestWhenInUseAuthorization()
-        location_manager.requestLocation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        map_view.setRegion(MapsViewController.region, animated: false)
+        populateAnnotations(restaurants: HomeViewController.restaurants)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        map_view.removeAnnotations(map_view.annotations)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,12 +86,27 @@ class MapsViewController: UIViewController {
         dim_view.frame = CGRect(x: 0, y: top, width: width, height: height)
     }
     
-    func animate_dim(dim_level: CGFloat) {
+    func animate_dim(dim_level : CGFloat) {
         UIView.animate(withDuration: 0.3) {
             self.dim_view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             self.dim_view.alpha = dim_level
         }
     }
+    
+    func populateAnnotations(restaurants : [VenueRecommendations.Restaurant]) {
+        restaurants.forEach({ (restaurant) in
+            let annotation = MKPointAnnotation()
+            
+            //  - Store ea. restaurant's info
+            annotation.title = restaurant.venue.name
+            annotation.coordinate = CLLocationCoordinate2D(latitude: restaurant.venue.location.lat, longitude: restaurant.venue.location.lng)
+            
+            DispatchQueue.main.async {
+                self.map_view.addAnnotation(annotation)
+            }
+        })
+    }
+    
     
     @objc func notification_dim_on(_ notification: Notification) {
         animate_dim(dim_level: 0.4)
@@ -125,43 +143,43 @@ class MapsViewController: UIViewController {
 // Responses include:
 //      - Authorization & Location requests that were sent earlier in viewDidLoad
 //      - Handles incoming location data
-extension MapsViewController : CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            // Trigger another requestLocation() b/c
-            // 1st attempt would have suffered a permission failure
-            location_manager.requestLocation()
-        }
-    }
-    
-    /*
- 
-     Region
-     ________________        __
-     |              |        |
-     |              |        |
-     |              |       Span
-     |              |        |
-     |______________|        __
-     
-     |--------------|
-            Span
-    */
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Only interested in the first location
-        if let user_location = locations.first {
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            
-            // Use's user's location go create region
-            let region = MKCoordinateRegion(center: user_location.coordinate, span: span)
-            
-            // Sets Screen to user's location
-            map_view.setRegion(region, animated: false)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("\n\tError: \(error)")
-    }
-}
+//extension MapsViewController : CLLocationManagerDelegate {
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        if status == .authorizedWhenInUse {
+//            // Trigger another requestLocation() b/c
+//            // 1st attempt would have suffered a permission failure
+//            HomeViewController.location_manager.requestLocation()
+//        }
+//    }
+//
+//    /*
+//
+//     Region
+//     ________________        __
+//     |              |        |
+//     |              |        |
+//     |              |       Span
+//     |              |        |
+//     |______________|        __
+//
+//     |--------------|
+//            Span
+//    */
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        // Only interested in the first location
+//        if let user_location = locations.first {
+//            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+//
+//            // Use's user's location go create region
+//            let region = MKCoordinateRegion(center: user_location.coordinate, span: span)
+//
+//            // Sets Screen to user's location
+//            map_view.setRegion(region, animated: false)
+//        }
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        print("\n\tError: \(error)")
+//    }
+//}

@@ -28,6 +28,8 @@
 		286B476722DFFDE7007E3C51 /* BottomSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */; };
 		28C1F96222E0FE290077B2CA /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D7B60EE22DCE3160098DBB0 /* Login.storyboard */; };
 		28E98CF922F79AED0024466F /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E98CF822F79AED0024466F /* YelpAPI.swift */; };
+		28E98D0E2300E24F0024466F /* FoursquarePlacesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E98D0D2300E24F0024466F /* FoursquarePlacesAPI.swift */; };
+		28E98D102300EC6B0024466F /* VenueRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E98D0F2300EC6B0024466F /* VenueRecommendations.swift */; };
 		4213BB8EBC6C81476531A06D /* Pods_cravethruUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF759626E243BCEEB45C4D2 /* Pods_cravethruUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,8 @@
 		286B476422DFFDE7007E3C51 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		286B476522DFFDE7007E3C51 /* BottomSheetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetViewController.xib; sourceTree = "<group>"; };
 		28E98CF822F79AED0024466F /* YelpAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpAPI.swift; sourceTree = "<group>"; };
+		28E98D0D2300E24F0024466F /* FoursquarePlacesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoursquarePlacesAPI.swift; sourceTree = "<group>"; };
+		28E98D0F2300EC6B0024466F /* VenueRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueRecommendations.swift; sourceTree = "<group>"; };
 		4067829F8A601F9C2DEA1BFF /* Pods-cravethruUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cravethruUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cravethruUITests/Pods-cravethruUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		529FA672A6F2C6682E06DCAD /* Pods-cravethruTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cravethruTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cravethruTests/Pods-cravethruTests.release.xcconfig"; sourceTree = "<group>"; };
 		7415D7AE9CE336CBC7393ED4 /* Pods-cravethru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cravethru.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cravethru/Pods-cravethru.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,12 +172,12 @@
 			isa = PBXGroup;
 			children = (
 				28E98CF722F79AED0024466F /* APICaller */,
+				1DA270ED22F0BEA7008B32A2 /* LoginViewController.swift */,
 				1DA8026522F0D7DE001815BB /* GoogleService-Info.plist */,
 				286B472622D293D9007E3C51 /* AppDelegate.swift */,
 				286B472822D293D9007E3C51 /* HomeViewController.swift */,
 				1D7B60EE22DCE3160098DBB0 /* Login.storyboard */,
 				1DA270EF22F0BED5008B32A2 /* SignUpViewController.swift */,
-				1DA270ED22F0BEA7008B32A2 /* LoginViewController.swift */,
 				1DA270EB22EF8651008B32A2 /* SignUp.storyboard */,
 				286B472A22D293D9007E3C51 /* Home.storyboard */,
 				280775BE22ED2A7600167F51 /* Maps */,
@@ -206,6 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				28E98CF822F79AED0024466F /* YelpAPI.swift */,
+				28E98D0D2300E24F0024466F /* FoursquarePlacesAPI.swift */,
+				28E98D0F2300EC6B0024466F /* VenueRecommendations.swift */,
 			);
 			path = APICaller;
 			sourceTree = "<group>";
@@ -486,6 +492,8 @@
 				1DA270EE22F0BEA7008B32A2 /* LoginViewController.swift in Sources */,
 				1DA270F022F0BED5008B32A2 /* SignUpViewController.swift in Sources */,
 				286B476322DFFD9F007E3C51 /* MapsViewController.swift in Sources */,
+				28E98D0E2300E24F0024466F /* FoursquarePlacesAPI.swift in Sources */,
+				28E98D102300EC6B0024466F /* VenueRecommendations.swift in Sources */,
 				286B472922D293D9007E3C51 /* HomeViewController.swift in Sources */,
 				28E98CF922F79AED0024466F /* YelpAPI.swift in Sources */,
 				286B472722D293D9007E3C51 /* AppDelegate.swift in Sources */,
