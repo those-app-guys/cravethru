@@ -37,7 +37,6 @@ class HomeViewController: UIViewController {
         // Show message to navigate user to enable Location Services
         case .denied, .restricted:
             show_settings_action()
-        
             break
         
         case .authorizedAlways, .authorizedWhenInUse:
@@ -51,6 +50,8 @@ class HomeViewController: UIViewController {
         HomeViewController.location_manager.startUpdatingLocation()
     }
     
+    // TO DO: Set Up Nav. Bar Buttons for:
+    //  ___, Home, Maps
     private func setupNavigationBarItems() {
         
     }
@@ -72,6 +73,8 @@ class HomeViewController: UIViewController {
         let user_lat = HomeViewController.location_manager.location?.coordinate.latitude
         let user_lon = HomeViewController.location_manager.location?.coordinate.longitude
         
+        // DEBUG
+        //  - User Coordinates
         print("\nLatitude: \(String(describing: user_lat)) | Longitude: \(String(describing: user_lon))\n")
         
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -90,17 +93,39 @@ class HomeViewController: UIViewController {
                 break
             }
         }
+        
+        
     }
 }
 
+
+/*
+ - locationManager(_:didChangeAuthStat)  -> Gets called when user responds to the permission dialog
+                                             If user chose "Allow", the status becomes:
+                                             CLAuthorizationStatus.AuthorizedWhenInUse
+ */
 extension HomeViewController : CLLocationManagerDelegate {
+        /*
+    
+         Region
+         ________________        __
+         |              |        |
+         |              |        |
+         |              |       Span
+         |              |        |
+         |______________|        __
+    
+         |--------------|
+                Span
+        */
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Only interested in the first location
         if let user_location = locations.first {
             let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
             
             // Use's user's location go create region
-            MapsViewController.region = MKCoordinateRegion(center: user_location.coordinate, span: span)            
+            MapsViewController.region = MKCoordinateRegion(center: user_location.coordinate, span: span)
         }
     }
     
@@ -122,5 +147,9 @@ extension HomeViewController : CLLocationManagerDelegate {
         @unknown default:
             break
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("\n\tLocation Manager in Home View Error: \(error)")
     }
 }

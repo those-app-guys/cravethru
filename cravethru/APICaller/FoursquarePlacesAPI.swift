@@ -39,7 +39,7 @@ class FoursquarePlacesAPI {
         getDate()
         let request_url = "https://api.foursquare.com/v2/venues/explore"
         let authorization = "?client_id=\(client_id)&client_secret=\(client_secret)&v=\(current_date)"
-        let parameters = "&ll=\(latitude),\(longitude)&section=\(category)&limit=\(limit)&openNow=\(NSNumber(value: open_now))"
+        let parameters = "&ll=\(latitude),\(longitude)&section=\(category)&limit=\(limit)&openNow=\(NSNumber(value: open_now))&sortByDistance=1"
 //        let parameters = "&ll=\(latitude),\(longitude)&limit=\(limit)&query=\(query)"
         
         let url_string = request_url + authorization + parameters
